@@ -1,0 +1,1 @@
+pref("extensions.{36e61c98-5a87-4eee-bace-8fed1aef6d79}.description", "chrome://fasttranslate/locale/fasttranslate.properties");

@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<RDF xmlns="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:em="http://www.mozilla.org/2004/em-rdf#">
+     
+    <Description about="urn:mozilla:install-manifest">
+        <em:id>{36e61c98-5a87-4eee-bace-8fed1aef6d79}</em:id>
+        <em:version>0.6</em:version>
+        <em:type>2</em:type>
+        <em:optionsURL>chrome://fasttranslate/content/preferences.xul</em:optionsURL>
+        
+        <em:name>Fast Translate</em:name>
+        <em:description>Fast translate</em:description>
+        <em:homepageURL>https://martinkonicek.net</em:homepageURL>
+        
+        <em:creator>Martin Konicek</em:creator>
+        
+        <!-- Firefox -->
+        <em:targetApplication>
+            <Description>
+                <em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id>
+                <em:minVersion>3.0</em:minVersion>
+                <em:maxVersion>4.0.*</em:maxVersion>
+            </Description>
+        </em:targetApplication>
+        
+    </Description>
+</RDF>

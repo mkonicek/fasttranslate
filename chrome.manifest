@@ -1,0 +1,9 @@
+# Firefox
+overlay		chrome://browser/content/browser.xul		chrome://fasttranslate/content/overlay-firefox.xul application={ec8030f7-c20a-464f-9b0e-13a3a9e97384}
+
+content		fasttranslate	chrome/content/
+
+resource	fasttranslate	chrome/content/
+skin		fasttranslate	classic	chrome/skin/classic/
+
+locale	fasttranslate	en-US	chrome/locale/en-US/

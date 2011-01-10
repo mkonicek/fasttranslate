@@ -1,0 +1,46 @@
+[Config]
+Compilator.SaveAll=0
+Compilator.Capture=0
+Compilator.HideOutput=0
+Compilator.LogType=0
+DefaultDir=D:\code\firefox\fasttranslate
+DefaultCPIndex=0
+LogtoEnd=1
+DontOpen=0
+AbsolutePath=0
+FileFormat=0
+ProjectFilesOnly=0
+[Project tree]
+fasttranslate
+	+fasttranslate
+		-defaults
+			-preferences
+				defaults\preferences\fasttranslate.js
+		+chrome
+			+content
+				chrome\content\overlay.js
+				chrome\content\overlay-firefox.xul
+				chrome\content\preferences.js
+				chrome\content\preferences.xul
+				chrome\content\UtilChrome.js
+				chrome\content\googleTranslateFirefox.js
+				chrome\content\googleTranslate.js
+				chrome\content\translateWindow.xul
+				chrome\content\translateWindow.js
+				chrome\content\translateWindow.html
+			+locale
+				-en-US
+					chrome\locale\en-US\contents.rdf
+					chrome\locale\en-US\fasttranslate.dtd
+					chrome\locale\en-US\fasttranslate.properties
+			+skin
+				+classic
+					chrome\skin\classic\contents.rdf
+					chrome\skin\classic\menuitem.png
+		deploy.bat
+		chrome.manifest
+		icon.png
+		install.rdf
+[Open project files]
+[Selected Project Files]
+Main=

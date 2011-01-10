@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<?xul-overlay href="chrome://fasttranslate/content/overlay.xul"?>
+<!DOCTYPE window SYSTEM "chrome://fasttranslate/locale/fasttranslate.dtd">
+
+<overlay id="id_fasttranslate_overlay"
+		 xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+	
+	<!-- Scripts -->
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.js"></script>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.7/jquery-ui.js"></script>
+	<script type="text/javascript" src="chrome://fasttranslate/content/UtilChrome.js"></script>
+	<script type="text/javascript" src="chrome://fasttranslate/content/overlay.js"></script>
+	<!-- Including a file here is necessary if it needs to access globals like window.alert() -->
+	<script type="text/javascript" src="chrome://fasttranslate/content/googleTranslate.js"></script>
+	<script type="text/javascript" src="chrome://fasttranslate/content/translateWindow.js"></script>
+	
+	<!-- Translations -->
+	<stringbundleset id="id_stringbundleset">
+		<stringbundle id="ui_strings" src="chrome://fasttranslate/locale/fasttranslate.properties"/>
+	</stringbundleset>
+	
+	<!-- Shortcut -->
+	<keyset>
+    <key id="key_openWindow" modifiers="accel" key="Q" oncommand="openWindowCommand.run()"/>
+  </keyset>
+	
+	<!-- Right click menu -->
+	<popup id="contentAreaContextMenu">
+		<menuseparator id="id_separator"/>
+
+	  <menuitem id="id_translateitem" label="&menuitem.title;" oncommand="openWindowCommand.run()"
+      key="key_openWindow" class="menu-iconic"  image="chrome://fasttranslate/skin/menuitem.png" />
+    
+	</popup>
+	
+</overlay>
