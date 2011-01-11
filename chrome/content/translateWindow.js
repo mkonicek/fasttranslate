@@ -1,5 +1,13 @@
 var txtInputId = '#txtInput';
-var outputId = '#outputSpan'; 
+var outputId = '#outputSpan';
+
+var languages = {
+    'cs':'Czech',
+    'en':'English',
+    'es':'Spanish',
+    'pl':'Polish',
+    'pl':'German'
+} 
 
 $(document).ready(function() {
   /*var a = $('<div>Hello world!</div>');
@@ -22,21 +30,22 @@ $(document).ready(function() {
 	$(txtInputId).keyup(function(event) {
 	   refreshTranslation();
 	});
-	
-});
+});   // document.ready
 
 $(window).load(function() {
     // Argument passed from caller (overlay.js)
-    var browserSelectedText = window.arguments[0];
-    setInput(browserSelectedText);
-    if (getInput() != '') {
-        refreshTranslation();
+    if (window.arguments != undefined) {
+        var browserSelectedText = window.arguments[0];
+        if (browserSelectedText != '') {
+            setInput(browserSelectedText);
+            refreshTranslation();
+        }
     }
 });  // window.load
 
 // Translates input text and shows translation in output
 function refreshTranslation() {
-    googleTranslate.translateSmart("en", "es", getInput(),
+    googleTranslate.translateSmart("en", "pl", getInput(),
       // output translate string
       function(translatedStr) { 
         setOutput(translatedStr); 
