@@ -14,6 +14,8 @@ $(document).ready(function() {
     // Default state
     setInput("");
     $(txtInputId).focus();
+    
+    fillLanguagesCombo();
   
     // Register events
 	$(txtInputId).keyup(function(event) {
@@ -37,24 +39,34 @@ $(window).load(function() {
 function refreshTranslation() {
     googleTranslate.translateSmart(defaultLang(), targetLang(), input(),
       // output translate string
-      function(translatedStr) { 
-        setOutput(translatedStr); 
-      },
+      function(translatedStr) { setOutput(translatedStr); },
       // output error message
       function(errorMessage) { setOutput(errorMessage); }
     );
 }
+
+function fillLanguagesCombo() {
+    allLangs = allLanguages.getLanguages();
+    $(cmbLangFilterId).empty();
+    $.each(allLangs, function(key, value) {   
+         $(cmbLangFilterId).
+              append($("<option />").
+              attr("value",key).
+              text(value)); 
+    });
+}
+
+var cmbLangFilterId = '#cmbLangFilter';
+var txtInputId = '#txtInput';
+var outputId = '#outputSpan';
 
 function defaultLang() {
     return "en";
 }
 
 function targetLang() {
-    return $('#cmbLangFilter').val();
+    return $(cmbLangFilterId).val();
 }
-
-var txtInputId = '#txtInput';
-var outputId = '#outputSpan';
 
 function input() {
     return $(txtInputId).val();
