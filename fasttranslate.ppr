@@ -42,5 +42,14 @@ fasttranslate
 		icon.png
 		install.rdf
 [Open project files]
+0=chrome\content\translateWindow.html
+1=chrome\content\translateWindow.js
 [Selected Project Files]
 Main=
+Selected=chrome\content\translateWindow.js
+[chrome\content\translateWindow.html]
+TopLine=5
+Caret=31,23
+[chrome\content\translateWindow.js]
+TopLine=1
+Caret=31,12

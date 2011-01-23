@@ -1,14 +1,3 @@
-var txtInputId = '#txtInput';
-var outputId = '#outputSpan';
-
-var languages = {
-    'cs':'Czech',
-    'en':'English',
-    'es':'Spanish',
-    'pl':'Polish',
-    'pl':'German'
-} 
-
 $(document).ready(function() {
   /*var a = $('<div>Hello world!</div>');
           //var b = a.load('translateWindow.html');
@@ -38,6 +27,7 @@ $(window).load(function() {
         var browserSelectedText = window.arguments[0];
         if (browserSelectedText != '') {
             setInput(browserSelectedText);
+            // show translation if some text was selected
             refreshTranslation();
         }
     }
@@ -45,7 +35,7 @@ $(window).load(function() {
 
 // Translates input text and shows translation in output
 function refreshTranslation() {
-    googleTranslate.translateSmart("en", "pl", getInput(),
+    googleTranslate.translateSmart(defaultLang(), targetLang(), input(),
       // output translate string
       function(translatedStr) { 
         setOutput(translatedStr); 
@@ -55,7 +45,18 @@ function refreshTranslation() {
     );
 }
 
-function getInput() {
+function defaultLang() {
+    return "en";
+}
+
+function targetLang() {
+    return $('#cmbLangFilter').val();
+}
+
+var txtInputId = '#txtInput';
+var outputId = '#outputSpan';
+
+function input() {
     return $(txtInputId).val();
 }
 
@@ -63,7 +64,7 @@ function setInput(v){
     return $(txtInputId).val(v);
 }
 
-function getOutput() {
+function output() {
     return $(outputId).html();
 }
 
