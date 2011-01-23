@@ -16,6 +16,7 @@ $(document).ready(function() {
     $(txtInputId).focus();
     
     fillLanguagesCombo();
+    fillStarredLanguages();
   
     // Register events
 	$(txtInputId).keyup(function(event) {
@@ -46,13 +47,26 @@ function refreshTranslation() {
 }
 
 function fillLanguagesCombo() {
-    allLangs = allLanguages.getLanguages();
     $(cmbLangFilterId).empty();
-    $.each(allLangs, function(key, value) {   
+    $.each(allLanguages.getLanguages(), function(langCode, langName) {   
          $(cmbLangFilterId).
               append($("<option />").
-              attr("value",key).
-              text(value)); 
+              attr("value", langCode).
+              text(langName)); 
+    });
+}
+
+function fillStarredLanguages() {
+    starredLangs = ['es', 'pl', 'de'];
+    allLangs = allLanguages.getLanguages();
+    $('#starredLanguages').empty();
+    $.each(starredLangs, function(index, langCode) {
+        langName = allLangs[langCode];
+        anchor = 
+            $('<a href="#"/>').
+            attr("class", "targetLangSel").
+            text(langName);
+        $('#starredLanguages').append($('<li />').append(anchor));
     });
 }
 
