@@ -1,3 +1,8 @@
+cmbLangFilter = '';
+txtInput = '';
+txtOutput = '';
+cStarredLanguages = '';
+
 $(document).ready(function() {
   /*var a = $('<div>Hello world!</div>');
           //var b = a.load('translateWindow.html');
@@ -11,15 +16,17 @@ $(document).ready(function() {
   alert("body" + $('body').html());
   $('body').append('<div>Body append!</div>');*/
 
+    initControls();
+
     // Default state
-    setInput("");
-    $(txtInputId).focus();
+    setInput('');
+    txtInput.focus();
     
     fillLanguagesCombo();
     fillStarredLanguages();
   
     // Register events
-	$(txtInputId).keyup(function(event) {
+	txtInput.keyup(function(event) {
 	   refreshTranslation();
 	});
 });   // document.ready
@@ -47,9 +54,9 @@ function refreshTranslation() {
 }
 
 function fillLanguagesCombo() {
-    $(cmbLangFilterId).empty();
+    cmbLangFilter.empty();
     $.each(allLanguages.getLanguages(), function(langCode, langName) {   
-         $(cmbLangFilterId).
+         cmbLangFilter.
               append($("<option />").
               attr("value", langCode).
               text(langName)); 
@@ -59,42 +66,45 @@ function fillLanguagesCombo() {
 function fillStarredLanguages() {
     starredLangs = ['es', 'pl', 'de'];
     allLangs = allLanguages.getLanguages();
-    $('#starredLanguages').empty();
+    cStarredLanguages.empty();
     $.each(starredLangs, function(index, langCode) {
         langName = allLangs[langCode];
         anchor = 
             $('<a href="#"/>').
             attr("class", "targetLangSel").
             text(langName);
-        $('#starredLanguages').append($('<li />').append(anchor));
+        cStarredLanguages.append($('<li />').append(anchor));
     });
 }
 
-var cmbLangFilterId = '#cmbLangFilter';
-var txtInputId = '#txtInput';
-var outputId = '#outputSpan';
+function initControls() {
+    cmbLangFilter = $('#cmbLangFilter');
+    txtInput = $('#txtInput');
+    txtOutput = $('#outputSpan');
+    cStarredLanguages = $('#starredLanguages');
+}
 
 function defaultLang() {
     return "en";
 }
 
 function targetLang() {
-    return $(cmbLangFilterId).val();
+    return cmbLangFilter.val();
 }
 
 function input() {
-    return $(txtInputId).val();
+    return txtInput.val();
 }
 
 function setInput(v){
-    return $(txtInputId).val(v);
+    txtInput.val(v);
 }
 
 function output() {
-    return $(outputId).html();
+    return txtOutput.html();
 }
 
 function setOutput(v) {
-    $(outputId).text(v);
+    txtOutput.text(v);
 }
 
