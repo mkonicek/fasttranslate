@@ -7,7 +7,7 @@ ul {
     opacity: 0;
 }
 
-li.starredLangItem:hover .starredLangDel {
+div.cStarredLang:hover .starredLangDel {
     opacity: 1;
 } 
 
