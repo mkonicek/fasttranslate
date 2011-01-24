@@ -4,7 +4,7 @@ txtOutput = '';
 cStarredLanguages = '';
 
 starredLangs = ['es', 'pl', 'de'];
-targetLang = starredLangs[0];
+targetLangCode = starredLangs[0];
 
 $(document).ready(function() {
   /*var a = $('<div>Hello world!</div>');
@@ -27,7 +27,7 @@ $(document).ready(function() {
     
     fillLanguagesCombo();
     fillStarredLanguages();
-    setTargetLang(targetLang);
+    setTargetLang(targetLangCode);
   
     // Register events
 	txtInput.keyup(function(event) {
