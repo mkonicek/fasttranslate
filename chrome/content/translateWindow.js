@@ -31,6 +31,8 @@ $(document).ready(function() {
 	});
 	
 	cmbLangFilter.change(function(event) {
+	   selectedLangCode = cmbLangFilter.val();
+	   addStarredLang(selectedLangCode, allLanguages.langName(selectedLangCode));
 	   refreshTranslation();
 	});
 });   // document.ready
@@ -73,14 +75,7 @@ function fillStarredLanguages() {
     cStarredLanguages.empty();
     $.each(starredLangs, function(index, langCode) {
         langName = allLangs[langCode];
-        anchor = 
-            $('<a href="#"/>').
-            attr("class", "targetLangSel").
-            text(langName);
-        anchor.click(function(event) {
-            selectTargetLanguage(langCode);
-        });
-        cStarredLanguages.append($('<li />').append(anchor));
+        addStarredLang(langCode, langName);
     });
 }
 
@@ -93,7 +88,18 @@ function initControls() {
 
 function selectTargetLanguage(langCode) {
     cmbLangFilter.val(langCode);
-    cmbLangFilter.change();
+    refreshTranslation();
+}
+
+function addStarredLang(langCode, langName) {
+    anchor = 
+        $('<a href="#"/>').
+        attr("class", "targetLangSel").
+        text(langName);
+    anchor.click(function(event) {
+        selectTargetLanguage(langCode);
+    });
+    cStarredLanguages.append($('<li />').append(anchor));
 }
 
 function defaultLang() {

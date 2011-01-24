@@ -28,6 +28,7 @@ fasttranslate
 				chrome\content\translateWindow.xul
 				chrome\content\translateWindow.js
 				chrome\content\translateWindow.html
+				chrome\content\allLanguages.js
 			+locale
 				-en-US
 					chrome\locale\en-US\contents.rdf
@@ -44,12 +45,20 @@ fasttranslate
 [Open project files]
 0=chrome\content\translateWindow.html
 1=chrome\content\translateWindow.js
+2=chrome\content\allLanguages.js
+3=chrome\content\googleTranslate.js
 [Selected Project Files]
 Main=
 Selected=chrome\content\translateWindow.js
 [chrome\content\translateWindow.html]
-TopLine=5
-Caret=31,23
+TopLine=13
+Caret=32,24
 [chrome\content\translateWindow.js]
 TopLine=1
-Caret=31,12
+Caret=28,121
+[chrome\content\allLanguages.js]
+TopLine=1
+Caret=42,6
+[chrome\content\googleTranslate.js]
+TopLine=41
+Caret=28,13
