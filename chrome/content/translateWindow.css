@@ -1,0 +1,13 @@
+ul {
+    list-style-type:none;
+}
+
+.starredLangDel {
+    float: right;
+    opacity: 0;
+}
+
+li.starredLangItem:hover .starredLangDel {
+    opacity: 1;
+} 
+

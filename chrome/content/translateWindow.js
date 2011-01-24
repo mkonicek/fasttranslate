@@ -26,7 +26,7 @@ $(document).ready(function() {
     txtInput.focus();
     
     fillLanguagesCombo();
-    fillStarredLanguages();
+    //fillStarredLanguages();
     setTargetLang(targetLangCode);
   
     // Register events

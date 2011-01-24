@@ -1,10 +1,13 @@
+<html>
 <head>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.7/jquery-ui.js"></script>
-<script src="utils.js"></script>
-<script src="googleTranslate.js"></script>
-<script src="translateWindow.js"></script>
-<script src="allLanguages.js"></script>
+  <link href="translateWindow.css" rel="stylesheet" type="text/css">
+  
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.7/jquery-ui.js"></script>
+  <script src="utils.js"></script>
+  <script src="googleTranslate.js"></script>
+  <script src="translateWindow.js"></script>
+  <script src="allLanguages.js"></script>
 </head>
 <body>
 
@@ -23,9 +26,12 @@
     <fieldset>
       <legend>Foreign languages</legend>
       <ul id="starredLanguages">
-        <li><a href="#" class="languageSelect">Polish</a></li>
-        <li><a href="#" class="languageSelect">Dutch</a></li>
-        <li><a href="#" class="languageSelect">Spanish</a></li>
+        <li class="starredLangItem">
+          <div class="cStarredLang">
+            <a href="#" class="starredLang">Spanish</a>
+            <a href="#" class="starredLangDel">x</a>  <!-- label with css bg image -->
+          </div>
+        </li>
       </ul>
     <select id="cmbLangFilter" name="cmbLangFilter">
       <option value="">Select one...</option>
@@ -39,3 +45,4 @@
 </div>
 
 </body>
+</html>
