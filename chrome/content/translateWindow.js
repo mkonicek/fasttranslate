@@ -29,6 +29,10 @@ $(document).ready(function() {
 	txtInput.keyup(function(event) {
 	   refreshTranslation();
 	});
+	
+	cmbLangFilter.change(function(event) {
+	   refreshTranslation();
+	});
 });   // document.ready
 
 $(window).load(function() {
@@ -73,6 +77,9 @@ function fillStarredLanguages() {
             $('<a href="#"/>').
             attr("class", "targetLangSel").
             text(langName);
+        anchor.click(function(event) {
+            selectTargetLanguage(langCode);
+        });
         cStarredLanguages.append($('<li />').append(anchor));
     });
 }
@@ -82,6 +89,11 @@ function initControls() {
     txtInput = $('#txtInput');
     txtOutput = $('#outputSpan');
     cStarredLanguages = $('#starredLanguages');
+}
+
+function selectTargetLanguage(langCode) {
+    cmbLangFilter.val(langCode);
+    cmbLangFilter.change();
 }
 
 function defaultLang() {
