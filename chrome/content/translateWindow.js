@@ -4,6 +4,7 @@ txtOutput = '';
 cStarredLanguages = '';
 
 starredLangs = ['es', 'pl', 'de'];
+targetLang = starredLangs[0];
 
 $(document).ready(function() {
   /*var a = $('<div>Hello world!</div>');
@@ -26,6 +27,7 @@ $(document).ready(function() {
     
     fillLanguagesCombo();
     fillStarredLanguages();
+    setTargetLang(targetLang);
   
     // Register events
 	txtInput.keyup(function(event) {
@@ -122,6 +124,10 @@ function defaultLang() {
 
 function targetLang() {
     return cmbLangFilter.val();
+}
+
+function setTargetLang(langCode) {
+    return cmbLangFilter.val(langCode);
 }
 
 function input() {
