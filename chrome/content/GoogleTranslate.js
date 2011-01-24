@@ -31,8 +31,9 @@ var googleTranslate = function () {
     				success: function(result) {
     				    if (result.responseData == null) {
     				        onError('Translation to ' + langTo + ' not supported.');
-                        }
-						onSuccess(result.responseData.translatedText);
+                        } else {
+                            onSuccess(result.responseData.translatedText);
+						}
 					},  
     				error: function(XMLHttpRequest, textStatus, errorThrown) {
 						onError(textStatus);

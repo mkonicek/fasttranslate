@@ -3,6 +3,8 @@ txtInput = '';
 txtOutput = '';
 cStarredLanguages = '';
 
+starredLangs = ['es', 'pl', 'de'];
+
 $(document).ready(function() {
   /*var a = $('<div>Hello world!</div>');
           //var b = a.load('translateWindow.html');
@@ -31,8 +33,10 @@ $(document).ready(function() {
 	});
 	
 	cmbLangFilter.change(function(event) {
+	   // Add selected lang to starred langs
 	   selectedLangCode = cmbLangFilter.val();
 	   addStarredLang(selectedLangCode, allLanguages.langName(selectedLangCode));
+	   
 	   refreshTranslation();
 	});
 });   // document.ready
@@ -51,6 +55,10 @@ $(window).load(function() {
 
 // Translates input text and shows translation in output
 function refreshTranslation() {
+    if (input() == '') {
+        setOutput('');
+        return;
+    }
     googleTranslate.translateSmart(defaultLang(), targetLang(), input(),
       // output translate string
       function(translatedStr) { setOutput(translatedStr); },
@@ -70,12 +78,11 @@ function fillLanguagesCombo() {
 }
 
 function fillStarredLanguages() {
-    starredLangs = ['es', 'pl', 'de'];
     allLangs = allLanguages.getLanguages();
     cStarredLanguages.empty();
     $.each(starredLangs, function(index, langCode) {
         langName = allLangs[langCode];
-        addStarredLang(langCode, langName);
+        initStarredLangUI(langCode, langName);
     });
 }
 
@@ -91,7 +98,7 @@ function selectTargetLanguage(langCode) {
     refreshTranslation();
 }
 
-function addStarredLang(langCode, langName) {
+function initStarredLangUI(langCode, langName) {
     anchor = 
         $('<a href="#"/>').
         attr("class", "targetLangSel").
@@ -100,6 +107,13 @@ function addStarredLang(langCode, langName) {
         selectTargetLanguage(langCode);
     });
     cStarredLanguages.append($('<li />').append(anchor));
+}
+
+function addStarredLang(langCode, langName) {
+    if (starredLangs.contains(langCode))
+        return;
+    starredLangs.push(langCode);
+    initStarredLangUI(langCode, langName);
 }
 
 function defaultLang() {
