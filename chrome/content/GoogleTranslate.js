@@ -3,20 +3,7 @@ var googleTranslate = function () {
     var translateUrl = "https://ajax.googleapis.com/ajax/services/language/translate";
     var detectUrl = "https://ajax.googleapis.com/ajax/services/language/detect";
     
-    return { 
-        /*openDialog : function()
-        {
-          var a = $('<div>Hello world!</div>');
-          //var b = a.load('translateWindow.html');
-          //alert(JSON.stringify(b));
-          a.dialog({
-				      //autoOpen: false,
-				      title: "Translate",
-				      width: 650,
-				      height: 450
-			    });
-        },*/
-          
+    return {   
         // langFrom, langTo: language code string (e.g. 'en')  
         // onSuccess: function(string translatedStr) 
         // onError: function(string message)
