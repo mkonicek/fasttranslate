@@ -29,11 +29,14 @@ var googleTranslate = function () {
                     v: '1.0',
                     langpair: langFrom + '|' + langTo },
     				success: function(result) {
-    								onSuccess(result.responseData.translatedText);
-    							},  
+    				    if (result.responseData == null) {
+    				        onError('Translation to ' + langTo + ' not supported.');
+                        }
+						onSuccess(result.responseData.translatedText);
+					},  
     				error: function(XMLHttpRequest, textStatus, errorThrown) {
-    								onError(textStatus);
-    							}  
+						onError(textStatus);
+					}  
     			});
         },
         
@@ -44,22 +47,22 @@ var googleTranslate = function () {
         translateSmart: function(defaultLang, foreignLang, inputStr, onSuccess, onError) 
         {
            googleTranslate.detect(inputStr, 
-            function(detectedLang, isReliable) {
-              // from anything to defaultLang 
-              var from = detectedLang;
-              var to = defaultLang; 
-              // if input is in defaultLang, output foreignLang
-              if (from == defaultLang) {
-                to = foreignLang;   
-              }
-              googleTranslate.translate(from, to, inputStr, 
-                function(translatedStr) { 
-                  // show translated string
-                  onSuccess(translatedStr); 
-                }, 
-                function(errorMessage) { onError(errorMessage); } );
-            }, 
-            function(errorMessage) { onError(errorMessage); } 
+              function(detectedLang, isReliable) {
+                  // from anything to defaultLang 
+                  var from = detectedLang;
+                  var to = defaultLang; 
+                  // if input is in defaultLang, output foreignLang
+                  if (from == defaultLang) {
+                    to = foreignLang;   
+                  }
+                  googleTranslate.translate(from, to, inputStr, 
+                    function(translatedStr) { 
+                      // show translated string
+                      onSuccess(translatedStr); 
+                    }, 
+                    function(errorMessage) { onError(errorMessage); } );
+              }, 
+              function(errorMessage) { onError(errorMessage); } 
           );
         },
         
