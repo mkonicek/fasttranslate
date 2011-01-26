@@ -69,6 +69,13 @@ function refreshTranslation() {
     );
 }
 
+function initControls() {
+    cmbLangFilter = $('#cmbLangFilter');
+    txtInput = $('#txtInput');
+    txtOutput = $('#outputSpan');
+    cStarredLanguages = $('#starredLanguages');
+}
+
 function fillLanguagesCombo() {
     cmbLangFilter.empty();
     $.each(allLanguages.getLanguages(), function(langCode, langName) {   
@@ -88,20 +95,13 @@ function fillStarredLanguages() {
     });
 }
 
-function initControls() {
-    cmbLangFilter = $('#cmbLangFilter');
-    txtInput = $('#txtInput');
-    txtOutput = $('#outputSpan');
-    cStarredLanguages = $('#starredLanguages');
-}
-
 function selectTargetLanguage(langCode) {
     cmbLangFilter.val(langCode);
     refreshTranslation();
 }
 
 function initStarredLangUI(langCode, langName) {
-    starredLangListItem = $(
+    var starredLangListItem = $(
         '<li class="starredLangItem">\
             <div class="cStarredLang">\
             <a href="#" class="starredLang">Spanish</a>\
@@ -114,6 +114,10 @@ function initStarredLangUI(langCode, langName) {
     anchor.text(langName);
     anchor.click(function(event) {
         selectTargetLanguage(langCode);
+    });
+    delButton = starredLangListItem.find('.starredLangDel');
+    delButton.click(function(event) {   // without 'var' this behaves strange
+        starredLangListItem.slideUp(400, function() { $(this).remove(); } );
     });
 }
 
