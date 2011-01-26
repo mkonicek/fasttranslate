@@ -3,7 +3,7 @@ txtInput = '';
 txtOutput = '';
 cStarredLanguages = '';
 
-starredLangs = ['es', 'pl', 'de'];
+starredLangs = ['es', 'pl', 'de', 'nl'];
 targetLangCode = starredLangs[0];
 
 $(document).ready(function() {
@@ -26,7 +26,7 @@ $(document).ready(function() {
     txtInput.focus();
     
     fillLanguagesCombo();
-    //fillStarredLanguages();
+    fillStarredLanguages();
     setTargetLang(targetLangCode);
   
     // Register events
@@ -101,14 +101,20 @@ function selectTargetLanguage(langCode) {
 }
 
 function initStarredLangUI(langCode, langName) {
-    anchor = 
-        $('<a href="#"/>').
-        attr("class", "targetLangSel").
-        text(langName);
+    starredLangListItem = $(
+        '<li class="starredLangItem">\
+            <div class="cStarredLang">\
+            <a href="#" class="starredLang">Spanish</a>\
+            <a href="#" class="starredLangDel">x</a>  <!-- label with css bg image -->\
+            </div>\
+        </li>');
+    // $.get("starredLanguage.html", function(data){}); // was slower
+    cStarredLanguages.append(starredLangListItem);
+    anchor = starredLangListItem.find('.starredLang');
+    anchor.text(langName);
     anchor.click(function(event) {
         selectTargetLanguage(langCode);
     });
-    cStarredLanguages.append($('<li />').append(anchor));
 }
 
 function addStarredLang(langCode, langName) {
