@@ -41,6 +41,8 @@ $(document).ready(function() {
 	   
 	   refreshTranslation();
 	});
+	
+	txtInput.autoResizeTextArea();
 });   // document.ready
 
 $(window).load(function() {

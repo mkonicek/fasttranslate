@@ -4,7 +4,9 @@
   
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.7/jquery-ui.js"></script>
+  <script src="autoresize.jquery.js"></script>
   <script src="utils.js"></script>
+  <script src="ui-utils.js"></script>
   <script src="googleTranslate.js"></script>
   <script src="translateWindow.js"></script>
   <script src="allLanguages.js"></script>
@@ -13,21 +15,27 @@
 
 <div id="windowDiv" style="width:600px">
   <div id="inputOutputDiv" style="float:left; width:60%">
+    <!-- input -->
     <div id="inputDiv">
-      <textarea id="txtInput">
+      <textarea id="txtInput" rows="5">
       </textarea>
     </div>
+    <!-- output -->
     <div id="outputDiv">
       <span id="outputSpan"></span>
     </div>
   </div>
+  <!-- contols -->
   <div id="controlsDiv" style="float:right; width:39%">
     <div>My selected language: <span id="myLang">English</span> <a href="#" id="btnChangeLang">change</a></span></div>
     <fieldset>
       <legend>Foreign languages</legend>
       <ul id="starredLanguages">
         <li class="starredLangItem">
-          
+            <div class="cStarredLang">
+            <a href="#" class="starredLang">Spanish</a>
+            <a href="#" class="starredLangDel">x</a>  <!-- label with css bg image -->
+            </div>
         </li>
       </ul>
     <select id="cmbLangFilter" name="cmbLangFilter">
