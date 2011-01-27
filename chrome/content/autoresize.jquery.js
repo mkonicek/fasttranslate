@@ -50,21 +50,34 @@
 					
                 })(),
                 lastScrollTop = null,
+                
                 updateSize = function() {
 					
                     // Prepare the clone:
                     clone.height(0).val($(this).val()).scrollTop(10000);
 					
+					neededHeight = clone.scrollTop();
+					resizeHeight = neededHeight + settings.extraSpace;
+					// if wanting to resize to a smaller height than normal, do nothing
+					// (prevents adding extra space even when not )
+					if (resizeHeight < origHeight) {
+					   if (lastScrollTop > origHeight) {
+					      // but when resizing from bigger to smaller, do it 
+                       } else {
+					       return;
+					   }    
+                    }    
                     // Find the height of text:
-                    var scrollTop = Math.max(clone.scrollTop(), origHeight) + settings.extraSpace,
-                        toChange = $(this).add(clone);
+                    var scrollTop = Math.max(neededHeight, origHeight) + settings.extraSpace,
+                    toChange = $(this).add(clone);
 						
                     // Don't do anything if scrollTop hasen't changed:
                     if (lastScrollTop === scrollTop) { return; }
                     lastScrollTop = scrollTop;
 					
                     // Check for limit:
-                    if ( scrollTop >= settings.limit ) {
+                    if ( scrollTop >= settings.limit ) { 
+                        // Show scrollbar
                         $(this).css('overflow-y','');
                         return;
                     }
