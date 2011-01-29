@@ -4,7 +4,8 @@
     $.widget( "ui.combobox", {
 		_create: function() {
 			var self = this,
-				select = this.element.hide(),
+				originalSelect = this.element,
+				select = originalSelect.hide(),
 				selected = select.children( ":selected" ),
 				value = selected.val() ? selected.text() : "";
 			var input = this.input = $( "<input>" )
@@ -32,6 +33,8 @@
 					},
 					select: function( event, ui ) {
 						ui.item.option.selected = true;
+						// raise change event on the original select item
+			            $(originalSelect).change();
 						self._trigger( "selected", event, {
 							item: ui.item.option
 						});
