@@ -128,6 +128,7 @@ function initStarredLangUI(langCode, langName) {
     delButton = starredLangListItem.find('.starredLangDel');
     delButton.click(function(event) {   // without 'var' this behaves strange
         starredLangListItem.slideUp(400, function() { $(this).remove(); } );
+        starredLangs.remove(langCode);
     });
 }
 
