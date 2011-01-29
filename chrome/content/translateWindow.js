@@ -3,6 +3,7 @@ cmbLangFilter = '';
 txtInput = '';
 txtOutput = '';
 cStarredLanguages = '';
+btnRelace = '';
 
 starredLangs = ['es', 'pl', 'de', 'nl'];
 targetLangCode = '';
@@ -46,6 +47,8 @@ $(document).ready(function() {
 	txtInput.autoResizeTextArea();
     cmbLangFilter.combobox();
     
+    btnReplace.click(function() { alert('a'); })
+    
     window.onkeyup = function (event) {
 		if (event.keyCode == 27) {
 			window.close ();
@@ -84,6 +87,7 @@ function initControls() {
     txtInput = $('#txtInput');
     txtOutput = $('#outputSpan');
     cStarredLanguages = $('#starredLanguages');
+    btnReplace = $('#btnReplace').button();
 }
 
 function fillLanguagesCombo() {
