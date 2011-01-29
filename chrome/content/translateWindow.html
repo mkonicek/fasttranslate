@@ -6,6 +6,7 @@
   
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.js"></script>
+  <!-- put scripts at the end to make loading faster? -->
   <script src="widgets/autoresize.jquery.js"></script>
   <script src="widgets/comboBox.js"></script>
   <script src="utils/utils.js"></script>
@@ -41,12 +42,14 @@
             </div>
         </li>
       </ul>
-      <select id="cmbLangFilter" name="cmbLangFilter">
-        <option value="">Select one...</option>
-        <option value="en">English</option>
-        <option value="de">German</option>
-        <option value="es">Spanish</option>
-      </select>
+      <div>
+        <select id="cmbLangFilter" name="cmbLangFilter">
+          <option value="">Select one...</option>
+          <option value="en">English</option>
+          <option value="de">German</option>
+          <option value="es">Spanish</option>
+        </select>
+      </div>
     </fieldset>
   </div>
   <div style="clear:both">
