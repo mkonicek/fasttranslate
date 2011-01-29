@@ -30,6 +30,12 @@ fasttranslate
 				chrome\content\translateWindow.html
 				chrome\content\allLanguages.js
 				chrome\content\utils.js
+				chrome\content\translateWindow.css
+				chrome\content\starredLanguage.html
+				chrome\content\ui-utils.js
+				chrome\content\autoresize.jquery.js
+				chrome\content\comboBox.js
+				chrome\content\comboBoxTest.html
 			+locale
 				-en-US
 					chrome\locale\en-US\contents.rdf
@@ -44,26 +50,78 @@ fasttranslate
 		icon.png
 		install.rdf
 [Open project files]
-0=chrome\content\translateWindow.html
-1=chrome\content\translateWindow.js
-2=chrome\content\googleTranslate.js
-3=chrome\content\allLanguages.js
-4=chrome\content\utils.js
+0=chrome\content\allLanguages.js
+1=chrome\content\utils.js
+2=chrome\content\translateWindow.html
+3=chrome\content\autoresize.jquery.js
+4=chrome\content\googleTranslate.js
+5=chrome\content\comboBox.js
+6=chrome\content\translateWindow.js
+7=chrome\content\translateWindow.css
+8=chrome\content\overlay.js
+9=chrome\content\overlay-firefox.xul
+10=chrome\content\preferences.js
+11=chrome\content\preferences.xul
+12=chrome\content\UtilChrome.js
+13=chrome\content\googleTranslateFirefox.js
+14=chrome\content\translateWindow.xul
+15=chrome\content\starredLanguage.html
+16=chrome\content\ui-utils.js
+17=chrome\content\comboBoxTest.html
 [Selected Project Files]
 Main=
-Selected=chrome\content\translateWindow.js
-[chrome\content\translateWindow.html]
-TopLine=3
-Caret=30,14
-[chrome\content\translateWindow.js]
-TopLine=1
-Caret=23,129
-[chrome\content\googleTranslate.js]
-TopLine=1
-Caret=14,6
+Selected=chrome\content\comboBoxTest.html
 [chrome\content\allLanguages.js]
 TopLine=1
 Caret=1,13
 [chrome\content\utils.js]
 TopLine=1
 Caret=34,2
+[chrome\content\translateWindow.html]
+TopLine=1
+Caret=75,8
+[chrome\content\autoresize.jquery.js]
+TopLine=32
+Caret=62,65
+[chrome\content\googleTranslate.js]
+TopLine=35
+Caret=34,46
+[chrome\content\comboBox.js]
+TopLine=1
+Caret=26,5
+[chrome\content\translateWindow.js]
+TopLine=25
+Caret=18,47
+[chrome\content\translateWindow.css]
+TopLine=1
+Caret=1,23
+[chrome\content\overlay.js]
+TopLine=1
+Caret=1,1
+[chrome\content\overlay-firefox.xul]
+TopLine=1
+Caret=1,1
+[chrome\content\preferences.js]
+TopLine=1
+Caret=1,1
+[chrome\content\preferences.xul]
+TopLine=1
+Caret=1,1
+[chrome\content\UtilChrome.js]
+TopLine=1
+Caret=1,1
+[chrome\content\googleTranslateFirefox.js]
+TopLine=1
+Caret=1,1
+[chrome\content\translateWindow.xul]
+TopLine=1
+Caret=1,1
+[chrome\content\starredLanguage.html]
+TopLine=1
+Caret=1,1
+[chrome\content\ui-utils.js]
+TopLine=1
+Caret=1,1
+[chrome\content\comboBoxTest.html]
+TopLine=1
+Caret=1,1

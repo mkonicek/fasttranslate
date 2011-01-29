@@ -1,12 +1,15 @@
 <html>
 <head>
-  <link href="translateWindow.css" rel="stylesheet" type="text/css">
+  <link href="css/translateWindow.css" rel="stylesheet" type="text/css" />
+  <link href="css/jquery-ui-1.8.9.css" rel="stylesheet" type="text/css" />
+  
   
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.7/jquery-ui.js"></script>
-  <script src="autoresize.jquery.js"></script>
-  <script src="utils.js"></script>
-  <script src="ui-utils.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.js"></script>
+  <script src="widgets/autoresize.jquery.js"></script>
+  <script src="widgets/comboBox.js"></script>
+  <script src="utils/utils.js"></script>
+  <script src="utils/ui-utils.js"></script>
   <script src="googleTranslate.js"></script>
   <script src="translateWindow.js"></script>
   <script src="allLanguages.js"></script>
@@ -38,12 +41,12 @@
             </div>
         </li>
       </ul>
-    <select id="cmbLangFilter" name="cmbLangFilter">
-      <option value="">Select one...</option>
-      <option value="en">English</option>
-      <option value="de">German</option>
-      <option value="es">Spanish</option>
-    </select>
+      <select id="cmbLangFilter" name="cmbLangFilter">
+        <option value="">Select one...</option>
+        <option value="en">English</option>
+        <option value="de">German</option>
+        <option value="es">Spanish</option>
+      </select>
     </fieldset>
   </div>
   <div style="clear:both">

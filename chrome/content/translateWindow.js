@@ -1,3 +1,4 @@
+// controls
 cmbLangFilter = '';
 txtInput = '';
 txtOutput = '';
@@ -43,6 +44,7 @@ $(document).ready(function() {
 	});
 	
 	txtInput.autoResizeTextArea();
+    cmbLangFilter.combobox();
 });   // document.ready
 
 $(window).load(function() {
