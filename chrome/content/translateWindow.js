@@ -73,7 +73,7 @@ function refreshTranslation() {
     }
     googleTranslate.translateSmart(defaultLang(), targetLang(), input(),
       // output translate string
-      function(translatedStr) { setOutput(translatedStr); },
+      function(translatedStr) { setOutput(unescape(translatedStr)); },
       // output error message
       function(errorMessage) { setOutput(errorMessage); }
     );
