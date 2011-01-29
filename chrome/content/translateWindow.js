@@ -5,7 +5,7 @@ txtOutput = '';
 cStarredLanguages = '';
 
 starredLangs = ['es', 'pl', 'de', 'nl'];
-targetLangCode = starredLangs[0];
+targetLangCode = '';
 
 $(document).ready(function() {
   /*var a = $('<div>Hello world!</div>');
@@ -81,7 +81,7 @@ function initControls() {
 }
 
 function fillLanguagesCombo() {
-    cmbLangFilter.empty();
+    //cmbLangFilter.empty();  // leave the one dummy item there, so that combo stays empty
     $.each(allLanguages.getLanguages(), function(langCode, langName) {   
          cmbLangFilter.
               append($("<option />").
