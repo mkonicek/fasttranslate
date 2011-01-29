@@ -45,6 +45,12 @@ $(document).ready(function() {
 	
 	txtInput.autoResizeTextArea();
     cmbLangFilter.combobox();
+    
+    window.onkeyup = function (event) {
+		if (event.keyCode == 27) {
+			window.close ();
+		}
+	}
 });   // document.ready
 
 $(window).load(function() {
