@@ -49,8 +49,8 @@ $(document).ready(function() {
 	cmbLangFilter.change(function(event) {
 	   // Add selected lang to starred langs
 	   selectedLangCode = cmbLangFilter.val();
+	   cCmbLangFilter.slideToggle(200);
 	   addStarredLang(selectedLangCode, allLanguages.langName(selectedLangCode));
-	   
 	   refreshTranslation();
 	});
 	
@@ -74,8 +74,9 @@ $(document).ready(function() {
     });
     
     btnAddStarredLang.click(function(event) {
-        cCmbLangFilter.slideToggle(200);
         cmbInput = $('#cCmbLangFilter .ui-autocomplete-input');
+        cmbInput.val('');
+        cCmbLangFilter.slideToggle(200);
         cmbInput.focus();
     }); 
     
