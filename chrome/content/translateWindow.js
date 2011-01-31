@@ -27,6 +27,7 @@ $(document).ready(function() {
     setInput('');
     txtInput.focus();
     
+    starredLangs = ['es', 'pl', 'de', 'nl'];
     fillLanguagesCombo();
     fillStarredLanguages();
     setTargetLang(targetLangCode);
@@ -48,6 +49,7 @@ $(document).ready(function() {
     cmbLangFilter.combobox();
     
     btnReplace.click(function() { alert('a'); })
+    btnReplace.toggle();
     
     window.onkeyup = function (event) {
 		if (event.keyCode == 27) {
@@ -66,6 +68,7 @@ $(window).load(function() {
             refreshTranslation();
         }
     }
+    alert('ls ' + globalStorage.length);
 });  // window.load
 
 // Translates input text and shows translation in output
@@ -140,6 +143,7 @@ function addStarredLang(langCode, langName) {
     if (starredLangs.contains(langCode))
         return;
     starredLangs.push(langCode);
+    globalStorage.saved = '3!';
     initStarredLangUI(langCode, langName);
 }
 

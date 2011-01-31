@@ -1,12 +1,17 @@
+body {
+   font-family: tahoma,arial,sans-serif;
+   font-size: 100%;
+}
+
 textarea {
-    width:100%;
+    width: 100%;
     display: block;
     overflow-x: hidden;
 }
 
 
 ul {
-    list-style-type:none;
+    list-style-type: none;
     padding-left: 0.5em;
 }
 

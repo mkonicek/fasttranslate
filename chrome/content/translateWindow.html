@@ -1,16 +1,22 @@
 <html>
 <head>
+  <!-- styles -->
   <link href="css/translateWindow.css" rel="stylesheet" type="text/css" />
   <link href="css/jquery-ui-1.8.9.css" rel="stylesheet" type="text/css" />
   
-  
+  <!-- put scripts at the end to make loading faster? -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.js"></script>
-  <!-- put scripts at the end to make loading faster? -->
+  
   <script src="widgets/autoresize.jquery.js"></script>
   <script src="widgets/comboBox.js"></script>
   <script src="utils/utils.js"></script>
   <script src="utils/ui-utils.js"></script>
+  <!--
+  <script src="utils/jquery-json-2.2.js"></script>
+  <script src="utils/jstorage.js"></script>
+  -->
+  
   <script src="googleTranslate.js"></script>
   <script src="translateWindow.js"></script>
   <script src="allLanguages.js"></script>
@@ -35,7 +41,7 @@
   </div>
   <!-- contols -->
   <div id="controlsDiv" style="float:right; width:39%">
-    <div>My selected language: <span id="myLang">English</span> <a href="#" id="btnChangeLang">change</a></span></div>
+    <div>My selected language: <a href="#" id="btnChangeLang">English</a></div>
     <fieldset>
       <legend>Foreign languages</legend>
       <ul id="starredLanguages">
