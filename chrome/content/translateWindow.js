@@ -1,9 +1,11 @@
 // controls
 cmbLangFilter = '';
+cCmbLangFilter = '';
 cmbDefaultLang = '';
 txtInput = '';
 txtOutput = '';
 cStarredLanguages = '';
+btnAddStarredLang = '';
 cOptions = '';
 txtTargetLangName = '';
 btnOptions = '';
@@ -55,6 +57,8 @@ $(document).ready(function() {
 	txtInput.autoResizeTextArea();
     cmbLangFilter.combobox();
     
+    cCmbLangFilter.hide();
+    
     cOptions.hide();
     btnOptions.click(function() {
         if (optionsFirstTime) { 
@@ -68,6 +72,10 @@ $(document).ready(function() {
             cmbInput.select();
         });
     });
+    
+    btnAddStarredLang.click(function(event) {
+        cCmbLangFilter.slideToggle(200);
+    }); 
     
     btnReplace.click(function() { alert('a'); })
     btnReplace.toggle();
@@ -186,11 +194,13 @@ function setOutput(v) {
 
 function initControls() {
     cmbLangFilter = $('#cmbLangFilter');
+    cCmbLangFilter = $('#cCmbLangFilter');
     cmbDefaultLang = $('#cmbDefaultLang'); 
     txtInput = $('#txtInput');
     txtOutput = $('#outputSpan');
     txtTargetLangName = $('#txtTargetLangName');
     cStarredLanguages = $('#starredLanguages');
+    btnAddStarredLang = $('#btnAddStarredLang');
     cOptions = $('#cOptions');
     btnOptions = $('#btnOptions');
     btnReplace = $('#btnReplace').button();

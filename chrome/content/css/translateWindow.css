@@ -12,12 +12,25 @@ textarea {
 
 ul {
     list-style-type: none;
-    padding-left: 0.5em;
+    padding: 0;
+    margin: 0;
+}
+
+#starredLanguages {
+    margin-bottom: 0.5em;
+}
+
+#cStarredLanguages {
+    padding: 0.5em /*vert*/ 0.5em /*horiz*/;
 }
 
 .starredLangDel {
     float: right;
     opacity: 0;
+}
+
+#btnAddStarredLang {
+    font-size: 90%;
 }
 
 div.cStarredLang:hover .starredLangDel {
