@@ -5,13 +5,14 @@ txtInput = '';
 txtOutput = '';
 cStarredLanguages = '';
 cOptions = '';
+txtTargetLangName = '';
 btnOptions = '';
 btnRelace = '';
 
 optionsFirstTime = true;
 
 starredLangs = ['es', 'pl', 'de', 'nl'];
-targetLangCode = '';
+targetLangCode = 'es';
 defaultLangCode = 'en';
 
 $(document).ready(function() {
@@ -59,10 +60,13 @@ $(document).ready(function() {
         if (optionsFirstTime) { 
             fillLanguagesCombo(cmbDefaultLang);
             cmbDefaultLang.val(defaultLangCode);
-            cmbDefaultLang.combobox();
+            cmbDefaultLang.combobox();  
             optionsFirstTime = false;
         }
-        cOptions.slideToggle(200);
+        cOptions.slideToggle(200, function () {
+            cmbInput = $('#cCmbDefaultLang .ui-autocomplete-input');
+            cmbInput.select();
+        });
     });
     
     btnReplace.click(function() { alert('a'); })
@@ -101,17 +105,6 @@ function refreshTranslation() {
     );
 }
 
-function initControls() {
-    cmbLangFilter = $('#cmbLangFilter');
-    cmbDefaultLang = $('#cmbDefaultLang'); 
-    txtInput = $('#txtInput');
-    txtOutput = $('#outputSpan');
-    cStarredLanguages = $('#starredLanguages');
-    cOptions = $('#cOptions');
-    btnOptions = $('#btnOptions');
-    btnReplace = $('#btnReplace').button();
-}
-
 function fillLanguagesCombo(comboBox) {
     //cmbLangFilter.empty();  // leave the one dummy item there, so that combo stays empty
     $.each(allLanguages.getLanguages(), function(langCode, langName) {   
@@ -132,7 +125,7 @@ function fillStarredLanguages() {
 }
 
 function selectTargetLanguage(langCode) {
-    cmbLangFilter.val(langCode);
+    setTargetLang(langCode);
     refreshTranslation();
 }
 
@@ -167,11 +160,12 @@ function addStarredLang(langCode, langName) {
 }
 
 function targetLang() {
-    return cmbLangFilter.val();
+    return targetLangCode;
 }
 
 function setTargetLang(langCode) {
-    return cmbLangFilter.val(langCode);
+    targetLangCode = langCode;
+    txtTargetLangName.text(allLanguages.langName(langCode));
 }
 
 function input() {
@@ -188,5 +182,17 @@ function output() {
 
 function setOutput(v) {
     txtOutput.text(v);
+}
+
+function initControls() {
+    cmbLangFilter = $('#cmbLangFilter');
+    cmbDefaultLang = $('#cmbDefaultLang'); 
+    txtInput = $('#txtInput');
+    txtOutput = $('#outputSpan');
+    txtTargetLangName = $('#txtTargetLangName');
+    cStarredLanguages = $('#starredLanguages');
+    cOptions = $('#cOptions');
+    btnOptions = $('#btnOptions');
+    btnReplace = $('#btnReplace').button();
 }
 
