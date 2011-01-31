@@ -75,6 +75,8 @@ $(document).ready(function() {
     
     btnAddStarredLang.click(function(event) {
         cCmbLangFilter.slideToggle(200);
+        cmbInput = $('#cCmbLangFilter .ui-autocomplete-input');
+        cmbInput.focus();
     }); 
     
     btnReplace.click(function() { alert('a'); })
