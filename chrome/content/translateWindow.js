@@ -1,12 +1,18 @@
 // controls
 cmbLangFilter = '';
+cmbDefaultLang = '';
 txtInput = '';
 txtOutput = '';
 cStarredLanguages = '';
+cOptions = '';
+btnOptions = '';
 btnRelace = '';
+
+optionsFirstTime = true;
 
 starredLangs = ['es', 'pl', 'de', 'nl'];
 targetLangCode = '';
+defaultLangCode = 'en';
 
 $(document).ready(function() {
   /*var a = $('<div>Hello world!</div>');
@@ -28,7 +34,7 @@ $(document).ready(function() {
     txtInput.focus();
     
     starredLangs = ['es', 'pl', 'de', 'nl'];
-    fillLanguagesCombo();
+    fillLanguagesCombo(cmbLangFilter);
     fillStarredLanguages();
     setTargetLang(targetLangCode);
   
@@ -47,6 +53,17 @@ $(document).ready(function() {
 	
 	txtInput.autoResizeTextArea();
     cmbLangFilter.combobox();
+    
+    cOptions.hide();
+    btnOptions.click(function() {
+        if (optionsFirstTime) { 
+            fillLanguagesCombo(cmbDefaultLang);
+            cmbDefaultLang.val(defaultLangCode);
+            cmbDefaultLang.combobox();
+            optionsFirstTime = false;
+        }
+        cOptions.slideToggle(200);
+    });
     
     btnReplace.click(function() { alert('a'); })
     btnReplace.toggle();
@@ -68,7 +85,6 @@ $(window).load(function() {
             refreshTranslation();
         }
     }
-    alert('ls ' + globalStorage.length);
 });  // window.load
 
 // Translates input text and shows translation in output
@@ -77,7 +93,7 @@ function refreshTranslation() {
         setOutput('');
         return;
     }
-    googleTranslate.translateSmart(defaultLang(), targetLang(), input(),
+    googleTranslate.translateSmart(defaultLangCode, targetLang(), input(),
       // output translate string
       function(translatedStr) { setOutput(unescape(translatedStr)); },
       // output error message
@@ -87,16 +103,19 @@ function refreshTranslation() {
 
 function initControls() {
     cmbLangFilter = $('#cmbLangFilter');
+    cmbDefaultLang = $('#cmbDefaultLang'); 
     txtInput = $('#txtInput');
     txtOutput = $('#outputSpan');
     cStarredLanguages = $('#starredLanguages');
+    cOptions = $('#cOptions');
+    btnOptions = $('#btnOptions');
     btnReplace = $('#btnReplace').button();
 }
 
-function fillLanguagesCombo() {
+function fillLanguagesCombo(comboBox) {
     //cmbLangFilter.empty();  // leave the one dummy item there, so that combo stays empty
     $.each(allLanguages.getLanguages(), function(langCode, langName) {   
-         cmbLangFilter.
+         comboBox.
               append($("<option />").
               attr("value", langCode).
               text(langName)); 
@@ -125,7 +144,7 @@ function initStarredLangUI(langCode, langName) {
             <a href="#" class="starredLangDel">x</a>  <!-- label with css bg image -->\
             </div>\
         </li>');
-    // $.get("starredLanguage.html", function(data){}); // was slower
+    // $.get("starredLanguage.html", function(data){}); // was slow
     cStarredLanguages.append(starredLangListItem);
     anchor = starredLangListItem.find('.starredLang');
     anchor.text(langName);
@@ -133,7 +152,7 @@ function initStarredLangUI(langCode, langName) {
         selectTargetLanguage(langCode);
     });
     delButton = starredLangListItem.find('.starredLangDel');
-    delButton.click(function(event) {   // without 'var' this behaves strange
+    delButton.click(function(event) {   // without 'var starredLangListItem' this behaves strange
         starredLangListItem.slideUp(400, function() { $(this).remove(); } );
         starredLangs.remove(langCode);
     });
@@ -145,10 +164,6 @@ function addStarredLang(langCode, langName) {
     starredLangs.push(langCode);
     globalStorage.saved = '3!';
     initStarredLangUI(langCode, langName);
-}
-
-function defaultLang() {
-    return "en";
 }
 
 function targetLang() {

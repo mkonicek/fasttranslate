@@ -41,15 +41,14 @@
   </div>
   <!-- contols -->
   <div id="controlsDiv" style="float:right; width:39%">
-    <div>My selected language: <a href="#" id="btnChangeLang">English</a></div>
-    <fieldset>
-      <legend>Foreign languages</legend>
+    <div>Foreign language: <span id="targetLangName">Spanish</span></div>
+    <div id="cStarredLanguages">
       <ul id="starredLanguages">
         <li class="starredLangItem">
-            <div class="cStarredLang">
+          <div class="cStarredLang">
             <a href="#" class="starredLang">Spanish</a>
             <a href="#" class="starredLangDel">x</a>  <!-- label with css bg image -->
-            </div>
+          </div>
         </li>
       </ul>
       <div>
@@ -57,7 +56,14 @@
           <option value="">Select a language...</option>
         </select>
       </div>
-    </fieldset>
+    </div>
+    <a id="btnOptions" href="#">Options</a>
+    <div id="cOptions">
+      My native language: 
+        <select id="cmbDefaultLang" name="cmbLangFilter">
+          <option value="">Select a language...</option>
+        </select>
+    </div>
   </div>
   <div style="clear:both">
 </div>
