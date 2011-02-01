@@ -36,7 +36,7 @@ $(document).ready(function() {
     setInput('');
     txtInput.focus();
     
-    fillLanguagesCombo(cmbLangFilter);
+    fillLanguagesSelect(cmbLangFilter);
     fillStarredLanguages();
     setTargetLang(targetLangCode);
   
@@ -54,17 +54,18 @@ $(document).ready(function() {
 	});
 	
 	txtInput.autoResizeTextArea();
-    cmbLangFilter.combobox();
+    cmbLangFilter.makeComboBox();
     
     cCmbLangFilter.hide();
     
     cOptions.hide();
     btnOptions.click(function() {
         if (optionsFirstTime) { 
-            fillLanguagesCombo(cmbDefaultLang);
+            fillLanguagesSelect(cmbDefaultLang);
             cmbDefaultLang.val(defaultLangCode);
-            cmbDefaultLang.combobox();  
+            cmbDefaultLang.makeComboBox();
             optionsFirstTime = false;
+            cmbInput = $('#cCmbDefaultLang .ui-autocomplete-input');
         }
         cOptions.slideToggle(200, function () {
             cmbInput = $('#cCmbDefaultLang .ui-autocomplete-input');
@@ -115,10 +116,10 @@ function refreshTranslation() {
     );
 }
 
-function fillLanguagesCombo(comboBox) {
-    //cmbLangFilter.empty();  // leave the one dummy item there, so that combo stays empty
+function fillLanguagesSelect(select) {
+    //comboBox.empty();  // leave the one dummy item there, so that combo stays empty
     $.each(allLanguages.getLanguages(), function(langCode, langName) {   
-         comboBox.
+         select.
               append($("<option />").
               attr("value", langCode).
               text(langName)); 

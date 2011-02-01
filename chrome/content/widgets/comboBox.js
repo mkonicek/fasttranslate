@@ -2,14 +2,20 @@
 
 (function( $ ) {
     $.widget( "ui.combobox", {
+        options: {
+            spanId: ''
+        },
 		_create: function() {
 			var self = this,
 				originalSelect = this.element,
-				select = originalSelect.hide(),
+				select = this.element.hide(),
 				selected = select.children( ":selected" ),
 				value = selected.val() ? selected.text() : "";
+			var theSpan = $("<span> /").insertAfter(select);    
+			if (this.options.spanId) {
+                theSpan.attr('id', this.options.spanId);
+            }
 			var input = this.input = $( "<input>" )
-				.insertAfter( select )
 				.val( value )
 				.autocomplete({
 					delay: 0,
@@ -61,6 +67,8 @@
 				})
 				.addClass( "ui-widget ui-widget-content ui-corner-left" );
 
+            theSpan.append(input);
+
 			input.data( "autocomplete" )._renderItem = function( ul, item ) {
 				return $( "<li></li>" )
 					.data( "item.autocomplete", item )
@@ -101,3 +109,20 @@
 		}
 	});
 })( jQuery );
+
+var randomSpanCounter = 0;
+
+// Creates a span with a jQuery combo box based on existing select
+$.prototype.makeComboBox = function()
+{
+    newSpanId = 'randomSpanId' + randomSpanCounter;
+    randomSpanCounter++;
+    this.combobox({spanId: newSpanId});
+    // raise blur - bubble up to recognize if clicked inside the div
+    /*$("body").click(function (evt) {
+        var target = evt.target;
+        if(target.id !== 'cCmbDefaultLang'){
+            setTargetLang('pl');
+        }                
+    });*/    
+}
