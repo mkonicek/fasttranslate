@@ -36,28 +36,37 @@ $(document).ready(function() {
     setInput('');
     txtInput.focus();
     
-    fillLanguagesSelect(cmbLangFilter);
-    fillStarredLanguages();
     setTargetLang(targetLangCode);
-  
-    // Register events
+    
+    txtInput.autoResizeTextArea();
 	txtInput.keyup(function(event) {
 	   refreshTranslation();
 	});
 	
+	// starred languages
+	fillStarredLanguages();
+	// '+ add lang' button
+    btnAddStarredLang.click(function(event) {
+        cmbInput = $('#cCmbLangFilter .ui-autocomplete-input');
+        cmbInput.val('');
+        cCmbLangFilter.slideToggle(200);
+        btnAddStarredLang.slideToggle(200);
+        cmbInput.focus();
+    });
+    // add starred lang UI
+    cCmbLangFilter.hide();
+	fillLanguagesSelect(cmbLangFilter);
 	cmbLangFilter.change(function(event) {
-	   // Add selected lang to starred langs
-	   selectedLangCode = cmbLangFilter.val();
-	   cCmbLangFilter.slideToggle(200);
-	   addStarredLang(selectedLangCode, allLanguages.langName(selectedLangCode));
-	   refreshTranslation();
+        // add lang to starred langs
+        selectedLangCode = cmbLangFilter.val();
+        cCmbLangFilter.slideToggle(400);
+        btnAddStarredLang.slideToggle(400);
+        addStarredLang(selectedLangCode, allLanguages.langName(selectedLangCode));
+        refreshTranslation();
 	});
-	
-	txtInput.autoResizeTextArea();
     cmbLangFilter.makeComboBox();
     
-    cCmbLangFilter.hide();
-    
+    // options
     cOptions.hide();
     btnOptions.click(function() {
         if (optionsFirstTime) { 
@@ -73,21 +82,11 @@ $(document).ready(function() {
         });
     });
     
-    btnAddStarredLang.click(function(event) {
-        cmbInput = $('#cCmbLangFilter .ui-autocomplete-input');
-        cmbInput.val('');
-        cCmbLangFilter.slideToggle(200);
-        cmbInput.focus();
-    }); 
-    
+    // replace button
     btnReplace.click(function() { alert('a'); })
     btnReplace.toggle();
     
-    window.onkeyup = function (event) {
-		if (event.keyCode == 27) {
-			window.close ();
-		}
-	}
+    registerCloseWindowByEsc();
 });   // document.ready
 
 $(window).load(function() {
@@ -100,7 +99,7 @@ $(window).load(function() {
             refreshTranslation();
         }
     }
-});  // window.load
+});
 
 // Translates input text and shows translation in output
 function refreshTranslation() {
@@ -208,5 +207,13 @@ function initControls() {
     cOptions = $('#cOptions');
     btnOptions = $('#btnOptions');
     btnReplace = $('#btnReplace').button();
+}
+
+function registerCloseWindowByEsc() {
+    window.onkeyup = function (event) {
+        if (event.keyCode == 27) {
+        	window.close ();
+        }
+    }
 }
 
