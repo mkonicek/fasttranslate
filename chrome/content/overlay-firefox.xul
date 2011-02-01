@@ -6,12 +6,8 @@
 		 xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 	
 	<!-- Scripts -->
-	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.js"></script>
-	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.7/jquery-ui.js"></script>
-	<script type="text/javascript" src="chrome://fasttranslate/content/UtilChrome.js"></script>
 	<script type="text/javascript" src="chrome://fasttranslate/content/overlay.js"></script>
 	<!-- Including a file here is necessary if it needs to access globals like window.alert() -->
-	<script type="text/javascript" src="chrome://fasttranslate/content/googleTranslate.js"></script>
 	<script type="text/javascript" src="chrome://fasttranslate/content/translateWindow.js"></script>
 	
 	<!-- Translations -->
