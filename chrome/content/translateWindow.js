@@ -36,7 +36,6 @@ $(document).ready(function() {
     setInput('');
     txtInput.focus();
     
-    starredLangs = ['es', 'pl', 'de', 'nl'];
     fillLanguagesCombo(cmbLangFilter);
     fillStarredLanguages();
     setTargetLang(targetLangCode);
@@ -127,17 +126,17 @@ function fillLanguagesCombo(comboBox) {
 }
 
 function fillStarredLanguages() {
-    allLangs = allLanguages.getLanguages();
     cStarredLanguages.empty();
     $.each(starredLangs, function(index, langCode) {
-        langName = allLangs[langCode];
-        initStarredLangUI(langCode, langName);
+        initStarredLangUI(langCode, allLanguages.langName(langCode));
     });
 }
 
-function selectTargetLanguage(langCode) {
-    setTargetLang(langCode);
-    refreshTranslation();
+function addStarredLang(langCode, langName) {
+    if (starredLangs.contains(langCode))
+        return;
+    starredLangs.push(langCode);
+    initStarredLangUI(langCode, langName);
 }
 
 function initStarredLangUI(langCode, langName) {
@@ -153,21 +152,13 @@ function initStarredLangUI(langCode, langName) {
     anchor = starredLangListItem.find('.starredLang');
     anchor.text(langName);
     anchor.click(function(event) {
-        selectTargetLanguage(langCode);
+        setTargetLang(langCode);
     });
     delButton = starredLangListItem.find('.starredLangDel');
     delButton.click(function(event) {   // without 'var starredLangListItem' this behaves strange
         starredLangListItem.slideUp(400, function() { $(this).remove(); } );
         starredLangs.remove(langCode);
     });
-}
-
-function addStarredLang(langCode, langName) {
-    if (starredLangs.contains(langCode))
-        return;
-    starredLangs.push(langCode);
-    globalStorage.saved = '3!';
-    initStarredLangUI(langCode, langName);
 }
 
 function targetLang() {
@@ -177,6 +168,15 @@ function targetLang() {
 function setTargetLang(langCode) {
     targetLangCode = langCode;
     txtTargetLangName.text(allLanguages.langName(langCode));
+    refreshTranslation();
+}
+
+function defaultLang() {
+    return defaultLangCode;
+}
+
+function setDefaultLang(langCode) {
+    defaultLangCode = langCode;
 }
 
 function input() {
