@@ -11,11 +11,31 @@ txtTargetLangName = '';
 btnOptions = '';
 btnRelace = '';
 
+ffPrefsWindow = '';
+
 optionsFirstTime = true;
 
 starredLangs = ['es', 'pl', 'de', 'nl'];
 targetLangCode = 'es';
 defaultLangCode = 'en';
+
+function loadPreferences() {
+    if (typeof ffPrefsWindow != 'undefined') {
+        alert(ffPrefsWindow.getTargetLang());
+        setTargetLang(ffPrefsWindow.getTargetLang());
+    } else {
+        alert('ffprefs undef');
+    }
+}
+
+function savePreferences() {
+    if (typeof ffPrefsWindow != 'undefined') {
+        ffPrefsWindow.setTargetLang(targetLangCode);
+        ffPrefsWindow.savePreferences();
+    } else {
+        alert('ffprefs undef');
+    }
+}
 
 $(document).ready(function() {
   /*var a = $('<div>Hello world!</div>');
@@ -98,6 +118,8 @@ $(window).load(function() {
             // show translation if some text was selected
             refreshTranslation();
         }
+        ffPrefsWindow = window.arguments[1];
+        loadPreferences();
     }
 });
 
@@ -153,6 +175,7 @@ function initStarredLangUI(langCode, langName) {
     anchor.text(langName);
     anchor.click(function(event) {
         setTargetLang(langCode);
+        savePreferences();
     });
     delButton = starredLangListItem.find('.starredLangDel');
     delButton.click(function(event) {   // without 'var starredLangListItem' this behaves strange

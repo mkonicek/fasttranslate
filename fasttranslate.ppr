@@ -24,7 +24,7 @@ fasttranslate
 				+utils
 					chrome\content\utils\utils.js
 					chrome\content\utils\ui-utils.js
-				-css
+				+css
 					chrome\content\css\jquery-ui-1.8.9.css
 					chrome\content\css\translateWindow.css
 				chrome\content\overlay.js
@@ -55,24 +55,40 @@ fasttranslate
 3=chrome\content\css\translateWindow.css
 4=chrome\content\translateWindow.js
 5=chrome\content\utils\utils.js
+6=chrome\content\allLanguages.js
+7=chrome\content\utils\ui-utils.js
+8=chrome\content\overlay.js
+9=chrome\content\overlay-firefox.xul
 [Selected Project Files]
 Main=
-Selected=chrome\content\translateWindow.js
+Selected=chrome\content\overlay-firefox.xul
 [chrome\content\widgets\comboBox.js]
-TopLine=29
-Caret=56,36
+TopLine=99
+Caret=25,119
 [chrome\content\translateWindow.html]
 TopLine=1
-Caret=6,18
+Caret=42,21
 [chrome\content\css\jquery-ui-1.8.9.css]
 TopLine=397
 Caret=75,414
 [chrome\content\css\translateWindow.css]
 TopLine=1
-Caret=24,10
+Caret=26,20
 [chrome\content\translateWindow.js]
-TopLine=46
-Caret=18,146
+TopLine=13
+Caret=49,31
 [chrome\content\utils\utils.js]
 TopLine=1
 Caret=1,10
+[chrome\content\allLanguages.js]
+TopLine=1
+Caret=17,1
+[chrome\content\utils\ui-utils.js]
+TopLine=1
+Caret=8,8
+[chrome\content\overlay.js]
+TopLine=1
+Caret=9,8
+[chrome\content\overlay-firefox.xul]
+TopLine=1
+Caret=18,8
