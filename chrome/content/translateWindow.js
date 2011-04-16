@@ -11,7 +11,13 @@ txtTargetLangName = '';
 btnOptions = '';
 btnRelace = '';
 
-ffPrefsWindow = '';
+// object for saving persistent user preferences
+preferencesObject = '';
+
+function hasPreferences()
+{
+    return preferencesObject != '';
+}
 
 optionsFirstTime = true;
 
@@ -19,37 +25,25 @@ starredLangs = ['es', 'pl', 'de', 'nl'];
 targetLangCode = 'es';
 defaultLangCode = 'en';
 
-function loadPreferences() {
-    if (typeof ffPrefsWindow != 'undefined') {
-        alert(ffPrefsWindow.getTargetLang());
-        setTargetLang(ffPrefsWindow.getTargetLang());
-    } else {
-        alert('ffprefs undef');
+function loadPreferences(preferencesObject) {
+    if (!hasPreferences()) {
+       alert('Cannot load preferences - not running as a browser plugin?');
+       return; 
     }
+    alert(preferencesObject.getTargetLang());
+    setTargetLang(preferencesObject.getTargetLang());
 }
 
-function savePreferences() {
-    if (typeof ffPrefsWindow != 'undefined') {
-        ffPrefsWindow.setTargetLang(targetLangCode);
-        ffPrefsWindow.savePreferences();
-    } else {
-        alert('ffprefs undef');
+function savePreferences(preferencesObject) {
+    if (!hasPreferences()) {
+        alert('Cannot save preferences - not running as a browser plugin?');
+        return;
     }
+    preferencesObject.setTargetLang(targetLangCode);
+    preferencesObject.savePreferences(preferencesObject);
 }
 
 $(document).ready(function() {
-  /*var a = $('<div>Hello world!</div>');
-          //var b = a.load('translateWindow.html');
-          //alert(JSON.stringify(b));
-  a.dialog({
-      //autoOpen: false,
-      title: "Translate",
-      width: 650,
-      height: 450
-  });
-  alert("body" + $('body').html());
-  $('body').append('<div>Body append!</div>');*/
-
     initControls();
 
     // Default state
@@ -63,28 +57,28 @@ $(document).ready(function() {
 	   refreshTranslation();
 	});
 	
-	// starred languages
-	fillStarredLanguages();
+	// Starred languages
+	initStarredLanguagesUI();
 	// '+ add lang' button
     btnAddStarredLang.click(function(event) {
-        cmbInput = $('#cCmbLangFilter .ui-autocomplete-input');
+        cmbInput = $('#cAddStarredLang .ui-autocomplete-input');
         cmbInput.val('');
-        cCmbLangFilter.slideToggle(200);
+        cAddStarredLang.slideToggle(200);
         btnAddStarredLang.slideToggle(200);
         cmbInput.focus();
     });
-    // add starred lang UI
-    cCmbLangFilter.hide();
-	fillLanguagesSelect(cmbLangFilter);
-	cmbLangFilter.change(function(event) {
+    // add starred lang Combobox
+    cAddStarredLang.hide();
+	fillLanguagesSelect(cmbAddStarredLang);
+	cmbAddStarredLang.change(function(event) {
         // add lang to starred langs
-        selectedLangCode = cmbLangFilter.val();
-        cCmbLangFilter.slideToggle(400);
+        selectedLangCode = cmbAddStarredLang.val();
+        cAddStarredLang.slideToggle(400);
         btnAddStarredLang.slideToggle(400);
         addStarredLang(selectedLangCode, allLanguages.langName(selectedLangCode));
         refreshTranslation();
 	});
-    cmbLangFilter.makeComboBox();
+    cmbAddStarredLang.makeComboBox();
     
     // options
     cOptions.hide();
@@ -111,16 +105,18 @@ $(document).ready(function() {
 
 $(window).load(function() {
     // Argument passed from caller (overlay.js)
-    if (window.arguments != undefined) {
-        var browserSelectedText = window.arguments[0];
-        if (browserSelectedText != '') {
-            setInput(browserSelectedText);
-            // show translation if some text was selected
-            refreshTranslation();
-        }
-        ffPrefsWindow = window.arguments[1];
-        loadPreferences();
+    if (window.arguments == undefined) {
+        // not running as a browser plugin
+        return;
     }
+    var browserSelectedText = window.arguments[0];
+    if (browserSelectedText != '') {
+        setInput(browserSelectedText);
+        // show translation if some text was selected
+        refreshTranslation();
+    }
+    preferencesObject = window.arguments[1];
+    loadPreferences(preferencesObject);
 });
 
 // Translates input text and shows translation in output
@@ -130,27 +126,20 @@ function refreshTranslation() {
         return;
     }
     googleTranslate.translateSmart(defaultLangCode, targetLang(), input(),
-      // output translate string
+      // show translated string
       function(translatedStr) { setOutput(unescape(translatedStr)); },
-      // output error message
+      // show error message
       function(errorMessage) { setOutput(errorMessage); }
     );
 }
 
-function fillLanguagesSelect(select) {
-    //comboBox.empty();  // leave the one dummy item there, so that combo stays empty
+function fillLanguagesSelect(languagesSelect) {
+    //comboBox.empty();  // leave the one dummy item, so that combo stays empty
     $.each(allLanguages.getLanguages(), function(langCode, langName) {   
-         select.
+         languagesSelect.
               append($("<option />").
               attr("value", langCode).
               text(langName)); 
-    });
-}
-
-function fillStarredLanguages() {
-    cStarredLanguages.empty();
-    $.each(starredLangs, function(index, langCode) {
-        initStarredLangUI(langCode, allLanguages.langName(langCode));
     });
 }
 
@@ -159,6 +148,13 @@ function addStarredLang(langCode, langName) {
         return;
     starredLangs.push(langCode);
     initStarredLangUI(langCode, langName);
+}
+
+function initStarredLanguagesUI() {
+    cStarredLanguages.empty();
+    $.each(starredLangs, function(index, langCode) {
+        initStarredLangUI(langCode, allLanguages.langName(langCode));
+    });
 }
 
 function initStarredLangUI(langCode, langName) {
@@ -178,7 +174,7 @@ function initStarredLangUI(langCode, langName) {
         savePreferences();
     });
     delButton = starredLangListItem.find('.starredLangDel');
-    delButton.click(function(event) {   // without 'var starredLangListItem' this behaves strange
+    delButton.click(function(event) {
         starredLangListItem.slideUp(400, function() { $(this).remove(); } );
         starredLangs.remove(langCode);
     });
@@ -219,8 +215,8 @@ function setOutput(v) {
 }
 
 function initControls() {
-    cmbLangFilter = $('#cmbLangFilter');
-    cCmbLangFilter = $('#cCmbLangFilter');
+    cmbAddStarredLang = $('#cmbAddStarredLang');
+    cAddStarredLang = $('#cAddStarredLang');
     cmbDefaultLang = $('#cmbDefaultLang'); 
     txtInput = $('#txtInput');
     txtOutput = $('#outputSpan');

@@ -1,0 +1,18 @@
+Open a jQuery dialog instead of a window (does not work yet):
+
+
+  var a = $('<div>Hello world!</div>');
+          //var b = a.load('translateWindow.html');
+          //alert(JSON.stringify(b));
+  a.dialog({
+      //autoOpen: false,
+      title: "Translate",
+      width: 650,
+      height: 450
+  });
+
+
+Manually:
+
+  alert("body" + $('body').html());
+  $('body').append('<div>Body append!</div>');
