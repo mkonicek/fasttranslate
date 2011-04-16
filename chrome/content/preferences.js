@@ -1,54 +1,60 @@
+// We are using Firefox preferences (instead of local storage) because 
+// Firefox does not support local storage in file:/// protocol (Chrome does).
+// Maybe the FF team will change it in the final FF4, but we still want to
+// support FF3.
+
 // Constructor of Preferences object.
 var Preferences = function()
 {
-    this.defaultStarredLangs : ['es', 'de'];
-    this.defaultTargetLang: 'es';
-    this.defaultDefaultLang: 'en';
+    this.defaultStarredLangs = ['es', 'de'];
+    this.defaultTargetLang = 'es';
+    this.defaultDefaultLang = 'en';
     this.firefoxPrefs = this.getFirefoxPreferences();
+    return this;
 }
 
 // Returns true if persistence of preferences is available.
-Preference.prototype.isAvailable = function()
+Preferences.prototype.isAvailable = function()
 {
     return this.firefoxPrefs != '';
 }
 
 // Get target language.
-Preference.prototype.getTargetLang = function() 
+Preferences.prototype.getTargetLang = function() 
 {
-    if (!prefs.prefHasUserValue("targetLang")) {
+    if (!this.firefoxPrefs.prefHasUserValue("targetLang")) {
         alert('not present, return default');
         return this.defaultTargetLang;
     }
-    return prefs.getCharPref("targetLang");    
+    return this.firefoxPrefs.getCharPref("targetLang");    
 }
     
 // Sets target language.    
-Preference.prototype.setTargetLang = function(langCode) 
+Preferences.prototype.setTargetLang = function(langCode) 
 {
     alert('setting to ' + langCode);
-    prefs.setCharPref("targetLang", langCode);
-    alert('set ' + prefs.getCharPref("targetLang"));  
+    this.firefoxPrefs.setCharPref("targetLang", langCode);
+    alert('set ' + this.firefoxPrefs.getCharPref("targetLang"));  
 }
  
 // Gets array of starred languages.    
-Preference.prototype.getStarredLangs = function() 
+Preferences.prototype.getStarredLangs = function() 
 {
-    if (!prefs.prefHasUserValue("starredLangs")) {
-        return prefs.defaultStarred;
+    if (!this.firefoxPrefs.prefHasUserValue("starredLangs")) {
+        return this.firefoxPrefs.defaultStarred;
     }
-    return prefs.getCharPref("starredLangs");
+    return this.firefoxPrefs.getCharPref("starredLangs");
 } 
  
 // Sets array of starred languages.   
-Preference.prototype.setStarredLangs = function(arrayLangCodes) 
+Preferences.prototype.setStarredLangs = function(arrayLangCodes) 
 {
     alert("saving " + arrayLangCodes);
-    prefs.setCharPref("starredLangs", arrayLangCodes);     // TODO serialize
+    this.firefoxPrefs.setCharPref("starredLangs", arrayLangCodes);     // TODO serialize
 }  
 
 // Saves all preferences. 
-Preference.prototype.save = function() 
+Preferences.prototype.save = function() 
 {
     if (!this.isAvailable()) {
         return;
@@ -56,22 +62,22 @@ Preference.prototype.save = function()
     alert('saving');
     this.getFirefoxPrefsService().savePrefFile(null);
     alert('saved');
-} 
-
-// Get the fastranslate Firefox preferences object.
-Preference.prototype.getFirefoxPreferences = function()
-{
-    try {
-      return getFirefoxPrefsService().getBranch("extensions.mkonicek.fasttranslate.");
-    } catch(msg) {
-        alert(msg);
-        return '';
-    }
-}                    
+}                  
 
 // Get the Firefox preferences service.
 Preferences.prototype.getFirefoxPrefsService = function()
 {
     return Components.classes["@mozilla.org/preferences-service;1"]
                 .getService(Components.interfaces.nsIPrefService);
+}
+
+// Get the fastranslate Firefox preferences object.
+Preferences.prototype.getFirefoxPreferences = function()
+{
+    try {
+      return this.getFirefoxPrefsService().getBranch("extensions.mkonicek.fasttranslate.");
+    } catch(msg) {
+        alert(msg);
+        return '';
+    }
 }

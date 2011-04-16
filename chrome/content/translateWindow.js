@@ -12,7 +12,8 @@ var btnOptions = '';
 var btnRelace = '';
 
 // Object containing persistent user preferences (call save() to persist).
-var preferencesObject = new Preferences();
+// Passed from overlay.js (for FF security reasons).
+var preferencesObject = '';
 
 var optionsFirstTime = true;
 
@@ -27,23 +28,27 @@ $(window).load(function() {
         return;
     }
     
-    var browserSelectedText = window.arguments[0];
+    // Passed preferences object (we have to pass it from overlay.js
+    // for security reasons)
+    preferencesObject = window.arguments[0];
+    loadPreferences();
+    
+    var browserSelectedText = window.arguments[1];
     if (browserSelectedText != '') {
         setInput(browserSelectedText);
         // show translation if some text was selected
         refreshTranslation();
     }
-    loadPreferences(preferencesObject);
 });
 
-function loadPreferences(preferencesObject) {
+function loadPreferences() {
     alert(preferencesObject.getTargetLang());
     setTargetLang(preferencesObject.getTargetLang());
 }
 
-function savePreferences(preferencesObject) {
+function savePreferences() {
     preferencesObject.setTargetLang(targetLangCode);
-    preferencesObject.savePreferences(preferencesObject);
+    preferencesObject.save();
 }
 
 $(document).ready(function() {

@@ -9,7 +9,11 @@ var openWindowCommand = {
         // dependent - close window when Firefox closes
         var windowFeatures = "dependent,centerscreen,resizable,innerWidth=650,innerHeight=400";
         //windowFeatures += ",titlebar=no";
-        window.openDialog(windowUrl, "Translate", windowFeatures, selectedText, ffPrefs);
+        var preferences = new Preferences();
+        // passing preferences like this is necessary for security reasons:
+        // if preferences is just included by translateWindow.html, it does not
+        // have permissions to access Firefox preferences
+        window.openDialog(windowUrl, "Translate", windowFeatures, preferences, selectedText);
         
         // this is how to get resource strings into javascript
         //var ui_strings = document.getElementById("ui_strings");

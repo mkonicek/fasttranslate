@@ -1,3 +1,10 @@
+js:
+
+  http://blog.boyet.com/blog/javascriptlessons/javascript-for-c-programmers-prototypes-the-basics/
+  http://bonsaiden.github.com/JavaScript-Garden/
+  Calling member method from another member method - this.method() - "this" is required!
+
+
 Open a jQuery dialog instead of a window (does not work yet):
 
 

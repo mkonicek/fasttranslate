@@ -9,6 +9,7 @@
 	<script type="text/javascript" src="chrome://fasttranslate/content/overlay.js" />
 	<!-- Including a script here is necessary if it needs to access globals like window.alert() -->
 	<script type="text/javascript" src="chrome://fasttranslate/content/translateWindow.js" />
+	<script type="text/javascript" src="chrome://fasttranslate/content/preferences.js" />
 	<script type="text/javascript" src="chrome://fasttranslate/content/utils/firefox-utils.js" />
 	
 	<!-- Translations -->
