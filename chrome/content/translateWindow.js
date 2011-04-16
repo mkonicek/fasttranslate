@@ -11,13 +11,8 @@ txtTargetLangName = '';
 btnOptions = '';
 btnRelace = '';
 
-// object for saving persistent user preferences
-preferencesObject = ffPrefs;
-
-function hasPreferences()
-{
-    return preferencesObject != '';
-}
+// Object containing persistent user preferences (call save() to persist).
+preferencesObject = new Preferences();
 
 optionsFirstTime = true;
 
@@ -38,24 +33,15 @@ $(window).load(function() {
         // show translation if some text was selected
         refreshTranslation();
     }
-    //preferencesObject = window.arguments[1];
     loadPreferences(preferencesObject);
 });
 
 function loadPreferences(preferencesObject) {
-    if (!hasPreferences()) {
-       alert('Cannot load preferences - not running as a browser plugin?');
-       return; 
-    }
     alert(preferencesObject.getTargetLang());
     setTargetLang(preferencesObject.getTargetLang());
 }
 
 function savePreferences(preferencesObject) {
-    if (!hasPreferences()) {
-        alert('Cannot save preferences - not running as a browser plugin?');
-        return;
-    }
     preferencesObject.setTargetLang(targetLangCode);
     preferencesObject.savePreferences(preferencesObject);
 }
