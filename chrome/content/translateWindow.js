@@ -1,24 +1,24 @@
 // controls
-cmbLangFilter = '';
-cCmbLangFilter = '';
-cmbDefaultLang = '';
-txtInput = '';
-txtOutput = '';
-cStarredLanguages = '';
-btnAddStarredLang = '';
-cOptions = '';
-txtTargetLangName = '';
-btnOptions = '';
-btnRelace = '';
+var cmbLangFilter = '';
+var cCmbLangFilter = '';
+var cmbDefaultLang = '';
+var txtInput = '';
+var txtOutput = '';
+var cStarredLanguages = '';
+var btnAddStarredLang = '';
+var cOptions = '';
+var txtTargetLangName = '';
+var btnOptions = '';
+var btnRelace = '';
 
 // Object containing persistent user preferences (call save() to persist).
-preferencesObject = new Preferences();
+var preferencesObject = new Preferences();
 
-optionsFirstTime = true;
+var optionsFirstTime = true;
 
-starredLangs = ['es', 'pl', 'de', 'nl'];
-targetLangCode = 'es';
-defaultLangCode = 'en';
+var starredLangs = ['es', 'pl', 'de', 'nl'];
+var targetLangCode = 'es';
+var defaultLangCode = 'en';
 
 $(window).load(function() {
     // Argument passed from caller (overlay.js)
@@ -64,7 +64,7 @@ $(document).ready(function() {
 	initStarredLanguagesUI();
 	// '+ add lang' button
     btnAddStarredLang.click(function(event) {
-        cmbInput = $('#cAddStarredLang .ui-autocomplete-input');
+        var cmbInput = $('#cAddStarredLang .ui-autocomplete-input');
         cmbInput.val('');
         cAddStarredLang.slideToggle(200);
         btnAddStarredLang.slideToggle(200);
@@ -75,7 +75,7 @@ $(document).ready(function() {
 	fillLanguagesSelect(cmbAddStarredLang);
 	cmbAddStarredLang.change(function(event) {
         // add lang to starred langs
-        selectedLangCode = cmbAddStarredLang.val();
+        var selectedLangCode = cmbAddStarredLang.val();
         cAddStarredLang.slideToggle(400);
         btnAddStarredLang.slideToggle(400);
         addStarredLang(selectedLangCode, allLanguages.langName(selectedLangCode));

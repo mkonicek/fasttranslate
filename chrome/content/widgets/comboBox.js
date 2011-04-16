@@ -115,7 +115,7 @@ var randomSpanCounter = 0;
 // Creates a span with a jQuery combo box based on existing select
 $.prototype.makeComboBox = function()
 {
-    newSpanId = 'randomSpanId' + randomSpanCounter;
+    var newSpanId = 'randomSpanId' + randomSpanCounter;
     randomSpanCounter++;
     this.combobox({spanId: newSpanId});
     // raise blur - bubble up to recognize if clicked inside the div
