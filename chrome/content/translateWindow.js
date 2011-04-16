@@ -90,13 +90,18 @@ $(document).ready(function() {
             cmbDefaultLang.val(getDefaultLang());
             cmbDefaultLang.makeComboBox();
             optionsFirstTime = false;
-            cmbInput = $('#cCmbDefaultLang .ui-autocomplete-input');
         }
         cOptions.slideToggle(200, function () {
-            cmbInput = $('#cCmbDefaultLang .ui-autocomplete-input');
+            var cmbInput = $('#cCmbDefaultLang .ui-autocomplete-input');
             cmbInput.select();
         });
     });
+    cmbDefaultLang.change(function(event) {
+        // add lang to starred langs
+        var selectedDefaultLang = cmbDefaultLang.val();
+        setDefaultLang(selectedDefaultLang);
+        refreshTranslation();
+	});
     
     // replace button
     btnReplace.click(function() { alert('a'); })
