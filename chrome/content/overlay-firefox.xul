@@ -7,20 +7,22 @@
 	
 	<!-- Scripts -->
 	<script type="text/javascript" src="chrome://fasttranslate/content/overlay.js" />
-	<!-- Including a file here is necessary if it needs to access globals like window.alert() -->
+	<script type="text/javascript" src="chrome://fasttranslate/content/preferences.js" />
+	<!-- Including a script here is necessary if it needs to access globals like window.alert() -->
 	<script type="text/javascript" src="chrome://fasttranslate/content/translateWindow.js" />
+	<script type="text/javascript" src="chrome://fasttranslate/content/utils/firefox-utils.js" />
 	
 	<!-- Translations -->
 	<stringbundleset id="id_stringbundleset">
 		<stringbundle id="ui_strings" src="chrome://fasttranslate/locale/fasttranslate.properties"/>
 	</stringbundleset>
 	
-	<!-- Shortcut -->
+	<!-- Keyboard shortcuts -->
 	<keyset>
     <key id="key_openWindow" modifiers="accel" key="Q" oncommand="openWindowCommand.run()"/>
   </keyset>
 	
-	<!-- Right click menu -->
+	<!-- Browser context menu -->
 	<popup id="contentAreaContextMenu">
 		<menuseparator id="id_separator"/>
 
