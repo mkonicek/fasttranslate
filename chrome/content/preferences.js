@@ -32,9 +32,7 @@ Preferences.prototype.getTargetLang = function()
 // Sets target language.    
 Preferences.prototype.setTargetLang = function(langCode) 
 {
-    alert('setting to ' + langCode);
-    this.firefoxPrefs.setCharPref("targetLang", langCode);
-    alert('set ' + this.firefoxPrefs.getCharPref("targetLang"));  
+    this.firefoxPrefs.setCharPref("targetLang", langCode); 
 }
  
 // Gets array of starred languages.    
@@ -59,9 +57,7 @@ Preferences.prototype.save = function()
     if (!this.isAvailable()) {
         return;
     }
-    alert('saving');
     this.getFirefoxPrefsService().savePrefFile(null);
-    alert('saved');
 }                  
 
 // Get the Firefox preferences service.

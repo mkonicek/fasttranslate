@@ -18,8 +18,8 @@ var preferencesObject = '';
 var optionsFirstTime = true;
 
 var starredLangs = ['es', 'pl', 'de', 'nl'];
-var targetLangCode = 'es';
-var defaultLangCode = 'en';
+var targetLang = 'es';
+var defaultLang = 'en';
 
 $(window).load(function() {
     // Argument passed from caller (overlay.js)
@@ -42,12 +42,11 @@ $(window).load(function() {
 });
 
 function loadPreferences() {
-    alert(preferencesObject.getTargetLang());
     setTargetLang(preferencesObject.getTargetLang());
 }
 
 function savePreferences() {
-    preferencesObject.setTargetLang(targetLangCode);
+    preferencesObject.setTargetLang(targetLang);
     preferencesObject.save();
 }
 
@@ -58,7 +57,7 @@ $(document).ready(function() {
     setInput('');
     txtInput.focus();
     
-    setTargetLang(targetLangCode);
+    setTargetLang(targetLang);
     
     txtInput.autoResizeTextArea();
 	txtInput.keyup(function(event) {
@@ -80,10 +79,10 @@ $(document).ready(function() {
 	fillLanguagesSelect(cmbAddStarredLang);
 	cmbAddStarredLang.change(function(event) {
         // add lang to starred langs
-        var selectedLangCode = cmbAddStarredLang.val();
+        var selectedLang = cmbAddStarredLang.val();
         cAddStarredLang.slideToggle(400);
         btnAddStarredLang.slideToggle(400);
-        addStarredLang(selectedLangCode, allLanguages.langName(selectedLangCode));
+        addStarredLang(selectedLang, allLanguages.getLangName(selectedLang));
         refreshTranslation();
 	});
     cmbAddStarredLang.makeComboBox();
@@ -93,7 +92,7 @@ $(document).ready(function() {
     btnOptions.click(function() {
         if (optionsFirstTime) { 
             fillLanguagesSelect(cmbDefaultLang);
-            cmbDefaultLang.val(defaultLangCode);
+            cmbDefaultLang.val(defaultLang);
             cmbDefaultLang.makeComboBox();
             optionsFirstTime = false;
             cmbInput = $('#cCmbDefaultLang .ui-autocomplete-input');
@@ -113,11 +112,11 @@ $(document).ready(function() {
 
 // Translates input text and shows translation in output
 function refreshTranslation() {
-    if (input() == '') {
+    if (getInput() == '') {
         setOutput('');
         return;
     }
-    googleTranslate.translateSmart(defaultLangCode, targetLang(), input(),
+    googleTranslate.translateSmart(defaultLang, getTargetLang(), getInput(),
       // show translated string
       function(translatedStr) { setOutput(unescape(translatedStr)); },
       // show error message
@@ -145,7 +144,7 @@ function addStarredLang(langCode, langName) {
 function initStarredLanguagesUI() {
     cStarredLanguages.empty();
     $.each(starredLangs, function(index, langCode) {
-        initStarredLangUI(langCode, allLanguages.langName(langCode));
+        initStarredLangUI(langCode, allLanguages.getLangName(langCode));
     });
 }
 
@@ -154,7 +153,7 @@ function initStarredLangUI(langCode, langName) {
         '<li class="starredLangItem">\
             <div class="cStarredLang">\
             <a href="#" class="starredLang">Spanish</a>\
-            <a href="#" class="starredLangDel">x</a>  <!-- label with css bg image -->\
+            <a href="#" class="starredLangDel">x</a>  <!-- TODO label with css bg image -->\
             </div>\
         </li>');
     // $.get("starredLanguage.html", function(data){}); // was slow
@@ -172,25 +171,25 @@ function initStarredLangUI(langCode, langName) {
     });
 }
 
-function targetLang() {
-    return targetLangCode;
+function getTargetLang() {
+    return targetLang;
 }
 
-function setTargetLang(langCode) {
-    targetLangCode = langCode;
-    txtTargetLangName.text(allLanguages.langName(langCode));
+function setTargetLang(lang) {
+    targetLang = lang;
+    txtTargetLangName.text(allLanguages.getLangName(lang));
     refreshTranslation();
 }
 
-function defaultLang() {
-    return defaultLangCode;
+function getDefaultLang() {
+    return defaultLang;
 }
 
-function setDefaultLang(langCode) {
-    defaultLangCode = langCode;
+function setDefaultLang(lang) {
+    defaultLang = lang;
 }
 
-function input() {
+function getInput() {
     return txtInput.val();
 }
 
@@ -198,7 +197,7 @@ function setInput(v){
     txtInput.val(v);
 }
 
-function output() {
+function getOutput() {
     return txtOutput.html();
 }
 

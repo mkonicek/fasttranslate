@@ -1,5 +1,5 @@
 var allLanguages = {
-    langName: function(langCode)
+    getLangName: function(langCode)
     {
         return allLangs[langCode];
     },
