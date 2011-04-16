@@ -6,11 +6,11 @@
         <em:id>{36e61c98-5a87-4eee-bace-8fed1aef6d79}</em:id>
         <em:version>0.6</em:version>
         <em:type>2</em:type>
-        <em:optionsURL>chrome://fasttranslate/content/preferences.xul</em:optionsURL>
+        <em:optionsURL>chrome://fasttranslate/content/options.xul</em:optionsURL>
         
         <em:name>Fast Translate</em:name>
         <em:description>Fast translate</em:description>
-        <em:homepageURL>https://martinkonicek.net</em:homepageURL>
+        <em:homepageURL>http://martinkonicek.net</em:homepageURL>
         
         <em:creator>Martin Konicek</em:creator>
         
