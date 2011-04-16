@@ -1,8 +1,14 @@
 function getFastTranslatePreferences() {
-    var prefs = Components.classes["@mozilla.org/preferences-service;1"]
-                .getService(Components.interfaces.nsIPrefService);
-    prefs = prefs.getBranch("extensions.mkonicek.fasttranslate.");
-    return prefs;
+    try
+    {
+      var prefs = Components.classes["@mozilla.org/preferences-service;1"]
+                  .getService(Components.interfaces.nsIPrefService);
+      prefs = prefs.getBranch("extensions.mkonicek.fasttranslate.");
+      return prefs;
+    } catch(ex) {
+        alert(ex);
+        return '';
+    }
 }
 
 var prefs = getFastTranslatePreferences();

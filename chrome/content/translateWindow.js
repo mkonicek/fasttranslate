@@ -12,7 +12,7 @@ btnOptions = '';
 btnRelace = '';
 
 // object for saving persistent user preferences
-preferencesObject = '';
+preferencesObject = ffPrefs;
 
 function hasPreferences()
 {
@@ -24,6 +24,23 @@ optionsFirstTime = true;
 starredLangs = ['es', 'pl', 'de', 'nl'];
 targetLangCode = 'es';
 defaultLangCode = 'en';
+
+$(window).load(function() {
+    // Argument passed from caller (overlay.js)
+    if (window.arguments == undefined) {
+        // not running as a browser plugin
+        return;
+    }
+    
+    var browserSelectedText = window.arguments[0];
+    if (browserSelectedText != '') {
+        setInput(browserSelectedText);
+        // show translation if some text was selected
+        refreshTranslation();
+    }
+    //preferencesObject = window.arguments[1];
+    loadPreferences(preferencesObject);
+});
 
 function loadPreferences(preferencesObject) {
     if (!hasPreferences()) {
@@ -102,22 +119,6 @@ $(document).ready(function() {
     
     registerCloseWindowByEsc();
 });   // document.ready
-
-$(window).load(function() {
-    // Argument passed from caller (overlay.js)
-    if (window.arguments == undefined) {
-        // not running as a browser plugin
-        return;
-    }
-    var browserSelectedText = window.arguments[0];
-    if (browserSelectedText != '') {
-        setInput(browserSelectedText);
-        // show translation if some text was selected
-        refreshTranslation();
-    }
-    preferencesObject = window.arguments[1];
-    loadPreferences(preferencesObject);
-});
 
 // Translates input text and shows translation in output
 function refreshTranslation() {
