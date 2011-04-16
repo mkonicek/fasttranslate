@@ -6,11 +6,13 @@
 		 xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 	
 	<!-- Scripts -->
-	<script type="text/javascript" src="chrome://fasttranslate/content/overlay.js" />
 	<!-- Including a script here is necessary if it needs to access globals like window.alert() -->
+	<script type="text/javascript" src="chrome://fasttranslate/content/overlay.js" />
+	<script type="text/javascript" src="chrome://fasttranslate/content/utils/utils.js" />
+	<script type="text/javascript" src="chrome://fasttranslate/content/utils/firefox-utils.js" />
 	<script type="text/javascript" src="chrome://fasttranslate/content/translateWindow.js" />
 	<script type="text/javascript" src="chrome://fasttranslate/content/preferences.js" />
-	<script type="text/javascript" src="chrome://fasttranslate/content/utils/firefox-utils.js" />
+	
 	
 	<!-- Translations -->
 	<stringbundleset id="id_stringbundleset">

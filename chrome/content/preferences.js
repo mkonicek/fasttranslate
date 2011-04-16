@@ -10,6 +10,12 @@ var Preferences = function()
     this.defaultTargetLang = 'es';
     this.defaultDefaultLang = 'en';
     this.firefoxPrefs = this.getFirefoxPreferences();
+    
+    this.starredLangs = this.defaultStarredLangs;
+    this.targetLang = this.defaultTargetLang;
+    this.defaultLang = this.defaultDefaultLang;
+    
+    this.load();
     return this;
 }
 
@@ -17,38 +23,75 @@ var Preferences = function()
 Preferences.prototype.isAvailable = function()
 {
     return this.firefoxPrefs != '';
-}
+}  
 
 // Get target language.
 Preferences.prototype.getTargetLang = function() 
 {
-    if (!this.firefoxPrefs.prefHasUserValue("targetLang")) {
-        alert('not present, return default');
-        return this.defaultTargetLang;
-    }
-    return this.firefoxPrefs.getCharPref("targetLang");    
+    return this.targetLang; 
 }
     
 // Sets target language.    
 Preferences.prototype.setTargetLang = function(langCode) 
 {
-    this.firefoxPrefs.setCharPref("targetLang", langCode); 
+    this.targetLang = langCode;
+    this.save(); 
+}
+
+// Get default language.
+Preferences.prototype.getDefaultLang = function() 
+{
+    return this.defaultLang; 
+}
+    
+// Sets default language.    
+Preferences.prototype.setDefaultLang = function(langCode) 
+{
+    this.defaultLang = langCode;
+    this.firefoxPrefs.setCharPref("defaultLang", langCode);
+    this.save(); 
 }
  
 // Gets array of starred languages.    
 Preferences.prototype.getStarredLangs = function() 
 {
-    if (!this.firefoxPrefs.prefHasUserValue("starredLangs")) {
-        return this.firefoxPrefs.defaultStarred;
-    }
-    return this.firefoxPrefs.getCharPref("starredLangs");
+    return this.starredLangs;
 } 
- 
-// Sets array of starred languages.   
-Preferences.prototype.setStarredLangs = function(arrayLangCodes) 
+
+// Adds a lang code to the collection of starred languages.
+Preferences.prototype.addStarredLang = function(langCode)
 {
-    alert("saving " + arrayLangCodes);
-    this.firefoxPrefs.setCharPref("starredLangs", arrayLangCodes);     // TODO serialize
+    /*if (this.starredLangs.contains(langCode)) {
+        return;
+    } */
+    alert("pref add " + langCode);
+    this.starredLangs.push(langCode); 
+    this.save();   
+}
+
+// Removes a lang code from the collection of starred languages.
+Preferences.prototype.removeStarredLang = function(langCode)
+{
+    alert("prefs removing " + langCode);
+    this.starredLangs.remove(langCode);
+    alert("removed, saving: " + this.starredLangs); 
+    this.save();   
+}
+
+// Loads the values from FF property service.
+Preferences.prototype.load = function() 
+{
+    if (this.firefoxPrefs.prefHasUserValue("targetLang")) {
+        this.targetLang = this.firefoxPrefs.getCharPref("targetLang");    
+    }
+    if (this.firefoxPrefs.prefHasUserValue("defaultLang")) {
+        this.defaultLang = this.firefoxPrefs.getCharPref("defaultLang");    
+    }
+    if (this.firefoxPrefs.prefHasUserValue("starredLangs")) {
+        var loadedLangs = this.firefoxPrefs.getCharPref("starredLangs"); // FF specific JSON
+        this.starredLangs = JSON.parse(loadedLangs);
+        alert(typeof this.starredLangs); 
+    }
 }  
 
 // Saves all preferences. 
@@ -57,6 +100,10 @@ Preferences.prototype.save = function()
     if (!this.isAvailable()) {
         return;
     }
+    this.firefoxPrefs.setCharPref("targetLang", this.getTargetLang());
+    this.firefoxPrefs.setCharPref("defaultLang", this.getDefaultLang());
+    alert("saving " + this.getStarredLangs());
+    this.firefoxPrefs.setCharPref("starredLangs", JSON.stringify(this.getStarredLangs())); // FF specific JSON
     this.getFirefoxPrefsService().savePrefFile(null);
 }                  
 
