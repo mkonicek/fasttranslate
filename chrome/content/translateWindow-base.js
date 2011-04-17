@@ -9,7 +9,6 @@ var txtOutput = '';
 var cStarredLanguages = '';
 var btnAddStarredLang = '';
 var cOptions = '';
-var txtTargetLangName = '';
 var btnOptions = '';
 var btnRelace = '';
 
@@ -24,7 +23,11 @@ function setTargetLang(lang) {
 
 function setTargetLangRefreshUI()
 {
-    txtTargetLangName.text(allLanguages.getLangName(getTargetLang()));
+    var targetLang = getTargetLang();
+    // remove selected class from all
+    $('#cStarredLanguages .starredLang').removeClass('starredLangSelected');
+    // add selected class to 1 selected
+    $('#cStarredLanguages .cStarredLang.' + targetLang + ' .starredLang').addClass('starredLangSelected');
     refreshTranslation();
 }
    
@@ -41,6 +44,9 @@ function getStarredLangs() {
 }
 
 function addStarredLang(langCode, langName) {
+    if (preferences.getStarredLangs().contains(langCode)) {
+        return;
+    }
     preferences.addStarredLang(langCode);
     initStarredLangUI(langCode, langName);
 }
@@ -71,7 +77,6 @@ function initControls() {
     cmbDefaultLang = $('#cmbDefaultLang'); 
     txtInput = $('#txtInput');
     txtOutput = $('#outputSpan');
-    txtTargetLangName = $('#txtTargetLangName');
     cStarredLanguages = $('#starredLanguages');
     btnAddStarredLang = $('#btnAddStarredLang');
     cOptions = $('#cOptions');

@@ -49,7 +49,6 @@ Preferences.prototype.setDefaultLang = function(langCode)
 {
     alert("preferences setting default lang to " + langCode);
     this.defaultLang = langCode;
-    this.firefoxPrefs.setCharPref("defaultLang", langCode);
     this.save(); 
 }
  

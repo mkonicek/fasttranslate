@@ -17,15 +17,16 @@
   <script src="lib/jstorage.js"></script>
   -->
   <script src="googleTranslate.js"></script>
-  <script src="translateWindow-base.js"></script>
-  <script src="translateWindow.js"></script>
   <script src="allLanguages.js"></script>
   <script src="preferences.js"></script>
+  <script src="preferences-default.js"></script>
+  <script src="translateWindow-base.js"></script>
+  <script src="translateWindow.js"></script>
 </head>
 <body>
 
 <div id="windowDiv" style="width:600px">
-  <div id="inputOutputDiv" style="float:left; width:60%">
+  <div id="inputOutputDiv">
     <!-- input -->
     <div id="inputDiv">
       <textarea id="txtInput" rows="5">
@@ -41,8 +42,7 @@
     </div>
   </div>
   <!-- contols -->
-  <div id="controlsDiv" style="float:right; width:39%">
-    <div>Selected: <span id="txtTargetLangName">Spanish</span></div>
+  <div id="controlsDiv">
     <div id="cStarredLanguages">
       <ul id="starredLanguages">
         <li class="starredLangItem">

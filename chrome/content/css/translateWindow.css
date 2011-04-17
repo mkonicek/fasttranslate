@@ -1,6 +1,19 @@
 body {
-   font-family: tahoma,arial,sans-serif;
-   font-size: 100%;
+    font-family: tahoma,arial,sans-serif;
+    font-size: 100%;
+}
+
+#inputOutputDiv {
+    float:left; width:60%;
+}
+
+#controlsDiv {
+    float:left; ;
+    margin-left:12px;
+}
+
+#cStarredLanguages {
+    margin-bottom:12px;
 }
 
 textarea {
@@ -20,13 +33,13 @@ ul {
     margin-bottom: 0.5em;
 }
 
-#cStarredLanguages {
-    padding: 0.5em /*vert*/ 0.5em /*horiz*/;
-}
-
 .starredLangDel {
     float: right;
     opacity: 0;
+}
+
+.starredLangSelected {
+    font-weight: bold;
 }
 
 #btnAddStarredLang {
@@ -39,6 +52,10 @@ div.cStarredLang:hover .starredLangDel {
 
 #targetLangName {
     font-color: bold;
+}
+
+#btnOptions {
+    font-size: 80%;
 }
 
 #cOptions {

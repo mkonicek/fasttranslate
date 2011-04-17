@@ -1,10 +1,6 @@
 // Object containing persistent user preferences (call save() to persist).
 // Passed from overlay.js (for FF security reasons).
-var preferences = {
-    starredLangs : ['es', 'de'],
-    targetLang : 'es',
-    defaultLang : 'en'
-};
+var preferences = new DefaultPreferences();
 
 var optionsFirstTime = true;
 
@@ -12,6 +8,8 @@ $(window).load(function() {
     // Argument passed from caller (overlay.js)
     if (window.arguments == undefined) {
         // not running as a browser plugin
+        // preferences = instance of Preferences talking to local storage
+        applyPreferences();
         return;
     }
     
@@ -58,7 +56,7 @@ $(document).ready(function() {
     });
     // add starred lang Combobox
     cAddStarredLang.hide();
-	fillLanguagesSelect(cmbAddStarredLang);
+	initDefaultLanguagesCombo(cmbAddStarredLang);
 	cmbAddStarredLang.change(function(event) {
         // add lang to starred langs
         var selectedLang = cmbAddStarredLang.val();
@@ -73,7 +71,7 @@ $(document).ready(function() {
     cOptions.hide();
     btnOptions.click(function() {
         if (optionsFirstTime) { 
-            fillLanguagesSelect(cmbDefaultLang);
+            initDefaultLanguagesCombo(cmbDefaultLang);
             cmbDefaultLang.val(getDefaultLang());
             cmbDefaultLang.makeComboBox();
             optionsFirstTime = false;
@@ -111,7 +109,7 @@ function refreshTranslation() {
     );
 }
 
-function fillLanguagesSelect(languagesSelect) {
+function initDefaultLanguagesCombo(languagesSelect) {
     //comboBox.empty();  // leave the one dummy item, so that combo stays empty
     $.each(allLanguages.getLanguages(), function(langCode, langName) {   
          languagesSelect.
@@ -130,9 +128,10 @@ function initStarredLanguagesUI() {
 }
 
 function initStarredLangUI(langCode, langName) {
+    alert("init UI " + langCode);
     var starredLangListItem = $(
         '<li class="starredLangItem">\
-            <div class="cStarredLang">\
+            <div class="cStarredLang ' + langCode + '">\
             <a href="#" class="starredLang">Spanish</a>\
             <a href="#" class="starredLangDel">x</a>  <!-- TODO label with css bg image -->\
             </div>\
