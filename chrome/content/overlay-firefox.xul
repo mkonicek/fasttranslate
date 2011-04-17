@@ -7,6 +7,7 @@
 	
 	<!-- Scripts -->
 	<!-- Including a script here is necessary if it needs to access globals like window.alert() -->
+	<script type="text/javascript" src="chrome://fasttranslate/content/lib/jquery-1.4.2.js" />
 	<script type="text/javascript" src="chrome://fasttranslate/content/overlay.js" />
 	<script type="text/javascript" src="chrome://fasttranslate/content/utils/utils.js" />
 	<script type="text/javascript" src="chrome://fasttranslate/content/utils/firefox-utils.js" />

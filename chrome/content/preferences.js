@@ -62,9 +62,9 @@ Preferences.prototype.getStarredLangs = function()
 // Adds a lang code to the collection of starred languages.
 Preferences.prototype.addStarredLang = function(langCode)
 {
-    /*if (this.starredLangs.contains(langCode)) {
+    if (this.starredLangs.contains(langCode)) {
         return;
-    } */
+    }
     alert("pref add " + langCode);
     this.starredLangs.push(langCode); 
     this.save();   
