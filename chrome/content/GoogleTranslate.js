@@ -40,6 +40,7 @@ var googleTranslate = function () {
     				dataType: 'jsonp',
             data: { q: inputStr,
                     v: '1.0',
+                    key: 'ABQIAAAAyVe43xCSbPm2ujTjdoIuHhTNFBTXcVoi_aH6YNJgFN7Emd4MJBS4E3dOq2L8GfPssVEyePXYxdy1aQ',
                     langpair: langFrom + '|' + langTo },
     				success: function(result) {
     				    if (!result.responseData) {
@@ -64,6 +65,7 @@ var googleTranslate = function () {
     				url: detectUrl,  
     				dataType: 'jsonp',
             data: { q: inputStr,
+                    key: 'ABQIAAAAyVe43xCSbPm2ujTjdoIuHhTNFBTXcVoi_aH6YNJgFN7Emd4MJBS4E3dOq2L8GfPssVEyePXYxdy1aQ',
                     v: '1.0' },
     				success: function(result) {
     				    if (!result.responseData) {

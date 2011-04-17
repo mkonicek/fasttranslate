@@ -7,8 +7,7 @@ var optionsFirstTime = true;
 $(window).load(function() {
     // Argument passed from caller (overlay.js)
     if (window.arguments == undefined) {
-        // not running as a browser plugin
-        // preferences = instance of Preferences talking to local storage
+        // not running as a browser plugin, still apply the default preferences
         applyPreferences();
         return;
     }
