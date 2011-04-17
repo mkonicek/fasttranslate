@@ -6,7 +6,7 @@
 // Constructor of Preferences object.
 var Preferences = function()
 {
-    this.defaultStarredLangs = ['es', 'de'];
+    this.defaultStarredLangs = ['es'];
     this.defaultTargetLang = 'es';
     this.defaultDefaultLang = firefox.getBrowserLang().split("-")[0];
     this.firefoxPrefs = this.getFirefoxPreferences();

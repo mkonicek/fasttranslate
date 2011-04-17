@@ -3,6 +3,10 @@ body {
     font-size: 100%;
 }
 
+#btnOptions {
+    display: none;
+}
+
 #inputOutputDiv {
     float:left; width:60%;
 }

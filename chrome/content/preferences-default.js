@@ -6,7 +6,7 @@
 // Constructor of Preferences object.
 var DefaultPreferences = function()
 {
-    this.defaultStarredLangs = ['es', 'de'];
+    this.defaultStarredLangs = ['es'];
     this.defaultTargetLang = 'es';
     this.defaultDefaultLang = 'en';
     
