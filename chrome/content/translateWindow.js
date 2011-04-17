@@ -69,6 +69,7 @@ $(document).ready(function() {
     // options
     cOptions.hide();
     btnOptions.click(function() {
+        btnOptions.toggleText("Options", "Close");
         if (optionsFirstTime) { 
             initDefaultLanguagesCombo(cmbDefaultLang);
             cmbDefaultLang.val(getDefaultLang());
