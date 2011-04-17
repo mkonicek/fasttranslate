@@ -64,6 +64,18 @@ div.cStarredLang:hover .starredLangDel {
     padding: 5px;
 }
 
+#creditsDiv {
+    padding-bottom:6px;
+    padding-right:12px;
+    display:block;
+    /*set the div in the bottom right corner*/
+    position:absolute;
+    bottom:0;
+    right:0;
+    color: #cccccc;
+    font-size:90%; 
+}
+
 .ui-button { margin-left: -1px; }
 .ui-button-icon-only .ui-button-text { padding: 0.35em; } 
 .ui-autocomplete-input { margin: 0; padding: 0.48em 0 0.47em 0.45em; }
