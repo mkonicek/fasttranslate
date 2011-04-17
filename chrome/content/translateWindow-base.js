@@ -24,11 +24,11 @@ function setTargetLang(lang) {
 function setTargetLangRefreshUI()
 {
     var targetLang = getTargetLang();
+    refreshTranslation();
     // remove selected class from all
     $('#cStarredLanguages .starredLang').removeClass('starredLangSelected');
     // add selected class to 1 selected
     $('#cStarredLanguages .cStarredLang.' + targetLang + ' .starredLang').addClass('starredLangSelected');
-    refreshTranslation();
 }
    
 function getDefaultLang() {

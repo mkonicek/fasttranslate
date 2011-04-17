@@ -60,6 +60,7 @@ $(document).ready(function() {
         cAddStarredLang.slideToggle(400);
         btnAddStarredLang.slideToggle(400);
         addStarredLang(selectedLang, allLanguages.getLangName(selectedLang));
+        setTargetLang(selectedLang);
         refreshTranslation();
 	});
     cmbAddStarredLang.makeComboBox();
@@ -101,6 +102,10 @@ function refreshTranslation() {
     }
     if (getInput().length > 5000) {
         setOutput('Sorry, the text is too long.');
+        return;
+    }
+    if (getTargetLang() == '') {
+        setOutput('Please add a language on the right.');
         return;
     }
     googleTranslate.translateSmart(getDefaultLang(), getTargetLang(), getInput(),
