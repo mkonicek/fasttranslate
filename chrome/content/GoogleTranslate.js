@@ -2,6 +2,10 @@ var googleTranslate = function () {
     
     var translateUrl = "https://ajax.googleapis.com/ajax/services/language/translate";
     var detectUrl = "https://ajax.googleapis.com/ajax/services/language/detect";
+    var apiKey = "ABQIAAAAyVe43xCSbPm2ujTjdoIuHhTNFBTXcVoi_aH6YNJgFN7Emd4MJBS4E3dOq2L8GfPssVEyePXYxdy1aQ";
+    //var translateUrl = "https://www.googleapis.com/language/translate/v2";
+    //var detectUrl = "https://www.googleapis.com/language/translate/v2/detect";
+    //var apiKey = "AIzaSyBQW4pQeEFnJVfu13NIQxCDdv41wb_B778";
     
     return {   
         // Translate auto->defaultLang.
@@ -11,13 +15,20 @@ var googleTranslate = function () {
         translateSmart: function(defaultLang, foreignLang, inputStr, onSuccess, onError) 
         {
            googleTranslate.detect(inputStr, 
-              function(detectedLang, isReliable) {
+              function(detectedLang, confidence) {
                   // from anything to defaultLang 
                   var from = detectedLang;
                   var to = defaultLang; 
                   // if input is in defaultLang, output foreignLang
                   if (from == defaultLang) {
-                    to = foreignLang;   
+                      to = foreignLang;   
+                  }
+                  if (confidence < 0.003) {
+                      // Special case: the input language can't really be detected.
+                      // Instead of using some random detected language, assume user 
+                      // typed something in their default lang.
+                      from = defaultLang;
+                      to = foreignLang;
                   }
                   googleTranslate.translate(from, to, inputStr, 
                     function(translatedStr) { 
@@ -40,11 +51,14 @@ var googleTranslate = function () {
     				dataType: 'jsonp',
             data: { q: inputStr,
                     v: '1.0',
-                    key: 'ABQIAAAAyVe43xCSbPm2ujTjdoIuHhTNFBTXcVoi_aH6YNJgFN7Emd4MJBS4E3dOq2L8GfPssVEyePXYxdy1aQ',
+                    key: apiKey,
                     langpair: langFrom + '|' + langTo },
     				success: function(result) {
     				    if (!result.responseData) {
-    				        onError('Google could not translate to ' + langTo + '.');
+    				        onError(sprintf('Google could not translate %s to %s: %s.', 
+                                    allLanguages.getLangName(langFrom), 
+                                    allLanguages.getLangName(langTo), 
+                                    result.responseDetails));
     				        //onError(result.responseDetails);
                         } else {
                             onSuccess(result.responseData.translatedText);
@@ -57,7 +71,7 @@ var googleTranslate = function () {
         },
         
         // langFrom, langTo: language code string (e.g. 'en')  
-        // onSuccess: function(string detectedLangCode, bool isReliable) 
+        // onSuccess: function(string detectedLangCode, float confidence) 
         // onError: function(string message)
         detect: function(inputStr, onSuccess, onError) 
         {
@@ -65,13 +79,13 @@ var googleTranslate = function () {
     				url: detectUrl,  
     				dataType: 'jsonp',
             data: { q: inputStr,
-                    key: 'ABQIAAAAyVe43xCSbPm2ujTjdoIuHhTNFBTXcVoi_aH6YNJgFN7Emd4MJBS4E3dOq2L8GfPssVEyePXYxdy1aQ',
+                    key: apiKey,
                     v: '1.0' },
     				success: function(result) {
     				    if (!result.responseData) {
     				        onError(result.responseDetails);
                         } else {
-    				        onSuccess(result.responseData.language, result.responseData.isReliable);
+    				        onSuccess(result.responseData.language, result.responseData.confidence);
     				    }    
     				},  
     				error: function(XMLHttpRequest, textStatus, errorThrown) {

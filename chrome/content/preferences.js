@@ -8,7 +8,7 @@ var Preferences = function()
 {
     this.defaultStarredLangs = ['es', 'de'];
     this.defaultTargetLang = 'es';
-    this.defaultDefaultLang = 'en';
+    this.defaultDefaultLang = firefox.getBrowserLang().split("-")[0];
     this.firefoxPrefs = this.getFirefoxPreferences();
     
     this.starredLangs = this.defaultStarredLangs;
@@ -47,7 +47,6 @@ Preferences.prototype.getDefaultLang = function()
 // Sets default language.    
 Preferences.prototype.setDefaultLang = function(langCode) 
 {
-    alert("preferences setting default lang to " + langCode);
     this.defaultLang = langCode;
     this.save(); 
 }
@@ -64,7 +63,6 @@ Preferences.prototype.addStarredLang = function(langCode)
     if (this.starredLangs.contains(langCode)) {
         return;
     }
-    alert("pref add " + langCode);
     this.starredLangs.push(langCode); 
     this.save();   
 }
@@ -72,9 +70,7 @@ Preferences.prototype.addStarredLang = function(langCode)
 // Removes a lang code from the collection of starred languages.
 Preferences.prototype.removeStarredLang = function(langCode)
 {
-    alert("prefs removing " + langCode);
     this.starredLangs.remove(langCode);
-    alert("removed, saving: " + this.starredLangs); 
     this.save();   
 }
 
@@ -90,7 +86,6 @@ Preferences.prototype.load = function()
     if (this.firefoxPrefs.prefHasUserValue("starredLangs")) {
         var loadedLangs = this.firefoxPrefs.getCharPref("starredLangs"); // FF specific JSON
         this.starredLangs = JSON.parse(loadedLangs);
-        alert(typeof this.starredLangs); 
     }
 }  
 
@@ -102,7 +97,6 @@ Preferences.prototype.save = function()
     }
     this.firefoxPrefs.setCharPref("targetLang", this.getTargetLang());
     this.firefoxPrefs.setCharPref("defaultLang", this.getDefaultLang());
-    alert("saving " + this.getStarredLangs());
     this.firefoxPrefs.setCharPref("starredLangs", JSON.stringify(this.getStarredLangs())); // FF specific JSON
     this.getFirefoxPrefsService().savePrefFile(null);
 }                  

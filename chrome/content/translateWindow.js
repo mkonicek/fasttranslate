@@ -15,7 +15,6 @@ $(window).load(function() {
     // Passed preferences object (we have to pass it from overlay.js
     // for security reasons)
     preferences = window.arguments[0];
-    alert("window.load " + preferences.starredLangs);
     applyPreferences();
     
     var browserSelectedText = window.arguments[1];
@@ -29,7 +28,6 @@ $(window).load(function() {
 function applyPreferences() {
 	initStarredLanguagesUI();
     setTargetLangRefreshUI();
-    alert("applyPreferences: setting default cmb val to " + getDefaultLang());
     cmbDefaultLang.val(getDefaultLang());
 }
 
@@ -101,6 +99,10 @@ function refreshTranslation() {
         setOutput('');
         return;
     }
+    if (getInput().length > 5000) {
+        setOutput('Sorry, the text is too long.');
+        return;
+    }
     googleTranslate.translateSmart(getDefaultLang(), getTargetLang(), getInput(),
         // show translated string
         function(translatedStr) { setOutput(unescape(translatedStr)); },
@@ -120,7 +122,6 @@ function initDefaultLanguagesCombo(languagesSelect) {
 }
 
 function initStarredLanguagesUI() {
-    alert("initing starred UI " + getStarredLangs());
     cStarredLanguages.empty();
     $.each(getStarredLangs(), function(index, langCode) {
         initStarredLangUI(langCode, allLanguages.getLangName(langCode));
@@ -128,7 +129,6 @@ function initStarredLanguagesUI() {
 }
 
 function initStarredLangUI(langCode, langName) {
-    alert("init UI " + langCode);
     var starredLangListItem = $(
         '<li class="starredLangItem">\
             <div class="cStarredLang ' + langCode + '">\
