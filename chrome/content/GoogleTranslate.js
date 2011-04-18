@@ -8,6 +8,8 @@ var googleTranslate = function () {
     //var apiKey = "AIzaSyBQW4pQeEFnJVfu13NIQxCDdv41wb_B778";
     
     return {   
+        noTargetLangErrorMsg : "Please specify target language.",
+    
         // Translate auto->defaultLang.
         // If inputStr is in defaultLang, translate to foreignLang.
         // onSuccess: function(string translatedStr, string sourceLang, string targetLang) 
@@ -32,7 +34,7 @@ var googleTranslate = function () {
                   }
                   if (to == '') {
                       // translating from default lang, but no foreign lang given
-                      onError("No target language.");
+                      onError(googleTranslate.noTargetLangErrorMsg);
                       return;
                   }
                   googleTranslate.translate(from, to, inputStr, 

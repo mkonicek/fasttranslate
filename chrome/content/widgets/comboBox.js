@@ -65,15 +65,7 @@
 						}
 					}
 				})
-				.addClass( "ui-widget ui-widget-content ui-corner-left" );
-				
-		    input.openDropDown = function() {
-		        this.autocomplete("search", "");
-            };
-            
-            input.closeDropDown = function() {
-		        this.autocomplete("close");
-            };		
+				.addClass( "ui-widget ui-widget-content ui-corner-left" );	
 
             theSpan.append(input);
 
@@ -99,12 +91,11 @@
 				.click(function() {
 					// close if already visible
 					if ( input.autocomplete( "widget" ).is( ":visible" ) ) {
-						input.closeDropDown();
+						input.autocomplete("close");
 						return;
 					}
-
-					// pass empty string as value to search for, displaying all results
-					input.openDropDown();
+                    // pass empty string as value to search for, displaying all results	
+					input.autocomplete("search", "");
 					input.focus();
 				});
 		}, // create

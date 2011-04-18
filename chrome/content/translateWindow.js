@@ -33,6 +33,7 @@ function applyPreferences() {
 
 $(document).ready(function() {
     initControls();
+    $("#noLanguageDiv").hide();
 
     // Default state
     setInput('');
@@ -71,14 +72,23 @@ function chooseLang()
     openAddLangDropdown();
 }
 
+// True if the "add language" UI is opened
+var isAddLangOpened = false;
+
 // Opens the "add new language" dropdown
 function openAddLangDropdown()
 {
     var cmbInput = $('#cAddStarredLang .ui-autocomplete-input');
+    if (isAddLangOpened) {
+    	cmbInput.autocomplete("close");
+    	closeAddLang();
+    	return;
+	}
     cmbInput.val('');
     btnAddStarredLang.slideToggle(200);
     cAddStarredLang.slideToggle(200, function() {
-        cmbInput.openDropDown();
+        isAddLangOpened = true;
+        cmbInput.autocomplete("search", "");
         cmbInput.focus();
     });
 }
@@ -87,11 +97,17 @@ function openAddLangDropdown()
 function addLangSelected()
 {
     var selectedLang = cmbAddStarredLang.val();
-    cAddStarredLang.slideToggle(400);
-    btnAddStarredLang.slideToggle(400);
+    closeAddLang();
     addStarredLang(selectedLang, allLanguages.getLangName(selectedLang));
     setTargetLang(selectedLang);
     refreshTranslation();
+}
+
+// Closes the "add language" UI
+function closeAddLang()
+{
+    cAddStarredLang.slideToggle(400, function() { isAddLangOpened = false; } );
+    btnAddStarredLang.slideToggle(400);
 }
 
 // Translates input text and shows translation in output
@@ -107,11 +123,17 @@ function refreshTranslation() {
     googleTranslate.translateSmart(getDefaultLang(), getTargetLang(), getInput(),
         // show translated string
         function(translatedStr, sourceLang, targetLang) { 
+            $("#noLanguageDiv").hide();
             updateTranslationResult(unescape(translatedStr), sourceLang, targetLang); 
         },
         // show error message
         function(errorMessage) { 
-            setOutput(errorMessage); 
+            if (errorMessage == googleTranslate.noTargetLangErrorMsg) { 
+                setOutput("");
+                $("#noLanguageDiv").show();
+            } else {
+                setOutput(errorMessage);
+            } 
         }
     );
 }
