@@ -27,11 +27,17 @@
 <body>
 
 <div id="windowDiv" style="width:600px">
+  <div id="infoDiv">
+       Type text to translate:
+  </div>
   <div id="inputOutputDiv">
     <!-- input -->
     <div id="inputDiv">
       <textarea id="txtInput" rows="5">
       </textarea>
+    </div>
+    <div id="noLanguageDiv">
+      <a href="javascript:chooseLang()">Choose a language</a>
     </div>
     <!-- output -->
     <div id="outputDiv">
@@ -44,8 +50,8 @@
   </div>
   <!-- contols -->
   <div id="controlsDiv">
-    Translate to:
     <div id="cStarredLanguages">
+      Translate to:
       <ul id="starredLanguages">
         <li class="starredLangItem">
           <div class="cStarredLang">

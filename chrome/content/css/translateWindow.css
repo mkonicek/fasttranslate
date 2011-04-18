@@ -3,6 +3,26 @@ body {
     font-size: 100%;
 }
 
+#infoDiv {
+    font-size: 80%;
+    margin: 12px 0; 
+}
+
+.infoDefaultLang, .infoForeignLang {
+    /*text-shadow:0 -1px 0 rgba(0,0,0,0.15),  
+                0 1px 0 rgba(255,255,255,0.8);*/
+    text-shadow: 1px 1px 1px #ddd;
+}
+
+#noLanguageDiv {
+    font-size: 90%; 
+    margin-top: 10px;
+}
+
+#outputDiv {
+    margin-top: 10px; 
+}
+
 #btnOptions {
     display: none;
 }
@@ -12,7 +32,7 @@ body {
 }
 
 #controlsDiv {
-    float:left; ;
+    float:left;
     margin-left:12px;
 }
 

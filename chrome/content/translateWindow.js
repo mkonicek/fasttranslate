@@ -45,11 +45,7 @@ $(document).ready(function() {
 	
 	// '+ add lang' button
     btnAddStarredLang.click(function(event) {
-        var cmbInput = $('#cAddStarredLang .ui-autocomplete-input');
-        cmbInput.val('');
-        cAddStarredLang.slideToggle(200);
-        btnAddStarredLang.slideToggle(200);
-        cmbInput.focus();
+        openAddLangDropdown();
     });
     // add starred lang Combobox
     cAddStarredLang.hide();
@@ -94,6 +90,22 @@ $(document).ready(function() {
     registerCloseWindowByEsc();
 });   // document.ready
 
+function chooseLang()
+{
+    openAddLangDropdown();
+}
+
+function openAddLangDropdown()
+{
+    var cmbInput = $('#cAddStarredLang .ui-autocomplete-input');
+    cmbInput.val('');
+    btnAddStarredLang.slideToggle(200);
+    cAddStarredLang.slideToggle(200, function() {
+        cmbInput.autocomplete("search", "");
+        cmbInput.focus();
+    });
+}
+
 // Translates input text and shows translation in output
 function refreshTranslation() {
     if (getInput() == '') {
@@ -104,16 +116,21 @@ function refreshTranslation() {
         setOutput('Sorry, the text is too long.');
         return;
     }
-    if (getTargetLang() == '') {
-        setOutput('Please add a language on the right.');
-        return;
-    }
     googleTranslate.translateSmart(getDefaultLang(), getTargetLang(), getInput(),
         // show translated string
-        function(translatedStr) { setOutput(unescape(translatedStr)); },
+        function(translatedStr, sourceLang, targetLang) { 
+            updateTranslationResult(unescape(translatedStr), sourceLang, targetLang); 
+        },
         // show error message
-        function(errorMessage) { setOutput(errorMessage); }
+        function(errorMessage) { 
+            setOutput(errorMessage); 
+        }
     );
+}
+
+function updateTranslationResult(translatedStr, sourceLang, targetLang)
+{
+    setOutput(translatedStr);
 }
 
 function initDefaultLanguagesCombo(languagesSelect) {

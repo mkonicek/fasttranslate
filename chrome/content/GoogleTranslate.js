@@ -10,7 +10,7 @@ var googleTranslate = function () {
     return {   
         // Translate auto->defaultLang.
         // If inputStr is in defaultLang, translate to foreignLang.
-        // onSuccess: function(string detectedLangCode, bool isReliable) 
+        // onSuccess: function(string translatedStr, string sourceLang, string targetLang) 
         // onError: function(string message)
         translateSmart: function(defaultLang, foreignLang, inputStr, onSuccess, onError) 
         {
@@ -24,16 +24,21 @@ var googleTranslate = function () {
                       to = foreignLang;   
                   }
                   if (confidence < 0.003) {
-                      // Special case: the input language can't really be detected.
+                      // Special case: the input language can't really be detected (one word).
                       // Instead of using some random detected language, assume user 
-                      // typed something in their default lang.
+                      // typed the word in their default lang.
                       from = defaultLang;
                       to = foreignLang;
                   }
+                  if (to == '') {
+                      // translating from default lang, but no foreign lang given
+                      onError("No target language.");
+                      return;
+                  }
                   googleTranslate.translate(from, to, inputStr, 
                     function(translatedStr) { 
-                      // show translated string
-                      onSuccess(translatedStr); 
+                        // show translated string
+                        onSuccess(translatedStr, from, to); 
                     }, 
                     function(errorMessage) { onError(errorMessage); } );
               }, 
