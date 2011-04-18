@@ -66,6 +66,14 @@
 					}
 				})
 				.addClass( "ui-widget ui-widget-content ui-corner-left" );
+				
+		    input.openDropDown = function() {
+		        this.autocomplete("search", "");
+            };
+            
+            input.closeDropDown = function() {
+		        this.autocomplete("close");
+            };		
 
             theSpan.append(input);
 
@@ -91,12 +99,12 @@
 				.click(function() {
 					// close if already visible
 					if ( input.autocomplete( "widget" ).is( ":visible" ) ) {
-						input.autocomplete( "close" );
+						input.closeDropDown();
 						return;
 					}
 
 					// pass empty string as value to search for, displaying all results
-					input.autocomplete( "search", "" );
+					input.openDropDown();
 					input.focus();
 				});
 		}, // create

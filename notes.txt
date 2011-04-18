@@ -23,3 +23,27 @@ Manually:
 
   alert("body" + $('body').html());
   $('body').append('<div>Body append!</div>');
+
+
+
+
+The old "Options" dropdown
+    btnOptions.click(function() {
+        btnOptions.toggleText("Options", "Close");
+        if (optionsFirstTime) { 
+            initDefaultLanguagesCombo(cmbDefaultLang);
+            cmbDefaultLang.val(getDefaultLang());
+            cmbDefaultLang.makeComboBox();
+            optionsFirstTime = false;
+        }
+        cOptions.slideToggle(200, function () {
+            var cmbInput = $('#cCmbDefaultLang .ui-autocomplete-input');
+            cmbInput.select();
+        });
+    });
+    cmbDefaultLang.change(function(event) {
+        // add lang to starred langs
+        var selectedDefaultLang = cmbDefaultLang.val();
+        setDefaultLang(selectedDefaultLang);
+        refreshTranslation();
+	});*/

@@ -57,25 +57,6 @@ $(document).ready(function() {
     
     // options
     cOptions.hide();
-    /*btnOptions.click(function() {
-        btnOptions.toggleText("Options", "Close");
-        if (optionsFirstTime) { 
-            initDefaultLanguagesCombo(cmbDefaultLang);
-            cmbDefaultLang.val(getDefaultLang());
-            cmbDefaultLang.makeComboBox();
-            optionsFirstTime = false;
-        }
-        cOptions.slideToggle(200, function () {
-            var cmbInput = $('#cCmbDefaultLang .ui-autocomplete-input');
-            cmbInput.select();
-        });
-    });
-    cmbDefaultLang.change(function(event) {
-        // add lang to starred langs
-        var selectedDefaultLang = cmbDefaultLang.val();
-        setDefaultLang(selectedDefaultLang);
-        refreshTranslation();
-	});*/
     
     // replace button
     btnReplace.click(function() { alert('a'); })
@@ -97,8 +78,7 @@ function openAddLangDropdown()
     cmbInput.val('');
     btnAddStarredLang.slideToggle(200);
     cAddStarredLang.slideToggle(200, function() {
-        // search for empty term to open the dropdown
-        cmbInput.autocomplete("search", "");
+        cmbInput.openDropDown();
         cmbInput.focus();
     });
 }
