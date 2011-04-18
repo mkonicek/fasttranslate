@@ -51,19 +51,13 @@ $(document).ready(function() {
     cAddStarredLang.hide();
 	initDefaultLanguagesCombo(cmbAddStarredLang);
 	cmbAddStarredLang.change(function(event) {
-        // add lang to starred langs
-        var selectedLang = cmbAddStarredLang.val();
-        cAddStarredLang.slideToggle(400);
-        btnAddStarredLang.slideToggle(400);
-        addStarredLang(selectedLang, allLanguages.getLangName(selectedLang));
-        setTargetLang(selectedLang);
-        refreshTranslation();
+        addLangSelected(); 
 	});
     cmbAddStarredLang.makeComboBox();
     
     // options
     cOptions.hide();
-    btnOptions.click(function() {
+    /*btnOptions.click(function() {
         btnOptions.toggleText("Options", "Close");
         if (optionsFirstTime) { 
             initDefaultLanguagesCombo(cmbDefaultLang);
@@ -81,7 +75,7 @@ $(document).ready(function() {
         var selectedDefaultLang = cmbDefaultLang.val();
         setDefaultLang(selectedDefaultLang);
         refreshTranslation();
-	});
+	});*/
     
     // replace button
     btnReplace.click(function() { alert('a'); })
@@ -90,20 +84,34 @@ $(document).ready(function() {
     registerCloseWindowByEsc();
 });   // document.ready
 
+// When user clicks the "Choose a language" helper link
 function chooseLang()
 {
     openAddLangDropdown();
 }
 
+// Opens the "add new language" dropdown
 function openAddLangDropdown()
 {
     var cmbInput = $('#cAddStarredLang .ui-autocomplete-input');
     cmbInput.val('');
     btnAddStarredLang.slideToggle(200);
     cAddStarredLang.slideToggle(200, function() {
+        // search for empty term to open the dropdown
         cmbInput.autocomplete("search", "");
         cmbInput.focus();
     });
+}
+
+// User selected a new language from the dropdown
+function addLangSelected()
+{
+    var selectedLang = cmbAddStarredLang.val();
+    cAddStarredLang.slideToggle(400);
+    btnAddStarredLang.slideToggle(400);
+    addStarredLang(selectedLang, allLanguages.getLangName(selectedLang));
+    setTargetLang(selectedLang);
+    refreshTranslation();
 }
 
 // Translates input text and shows translation in output
