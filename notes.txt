@@ -4,6 +4,10 @@ js:
   http://bonsaiden.github.com/JavaScript-Garden/
   Calling member method from another member method - this.method() - "this" is required!
 
+UI strings from js:
+    var ui_strings = document.getElementById("ui_strings");
+    ui_strings.getString("menuitem.title");
+
 
 Open a jQuery dialog instead of a window (does not work yet):
 

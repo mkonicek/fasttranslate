@@ -1,6 +1,10 @@
 body {
     font-family: tahoma,arial,sans-serif;
-    font-size: 100%;
+    font-size: 95%;
+}
+
+a {
+    color: #1993FF;
 }
 
 #infoDiv {
@@ -67,7 +71,7 @@ ul {
 }
 
 #btnAddStarredLang {
-    font-size: 90%;
+    font-size: 80%;
 }
 
 div.cStarredLang:hover .starredLangDel {

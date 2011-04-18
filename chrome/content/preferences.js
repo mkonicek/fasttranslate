@@ -1,6 +1,6 @@
 // We are using Firefox preferences (instead of local storage) because 
 // Firefox does not support local storage in file:/// protocol (Chrome does).
-// Maybe the FF team will change it in the final FF4, but we still want to
+// Maybe the FF team will change this in the final FF4, but we still want to
 // support FF3.
 
 // Constructor of Preferences object.
@@ -78,14 +78,14 @@ Preferences.prototype.removeStarredLang = function(langCode)
 Preferences.prototype.load = function() 
 {
     if (this.firefoxPrefs.prefHasUserValue("targetLang")) {
-        this.targetLang = this.firefoxPrefs.getCharPref("targetLang");    
+        this.targetLang = this.firefoxPrefs.getCharPref("targetLang"); 
     }
     if (this.firefoxPrefs.prefHasUserValue("defaultLang")) {
         this.defaultLang = this.firefoxPrefs.getCharPref("defaultLang");    
     }
     if (this.firefoxPrefs.prefHasUserValue("starredLangs")) {
-        var loadedLangs = this.firefoxPrefs.getCharPref("starredLangs"); // FF specific JSON
-        this.starredLangs = JSON.parse(loadedLangs);
+        var loadedLangs = this.firefoxPrefs.getCharPref("starredLangs"); 
+        this.starredLangs = JSON.parse(loadedLangs);    // FF specific JSON
     }
 }  
 
@@ -112,7 +112,7 @@ Preferences.prototype.getFirefoxPrefsService = function()
 Preferences.prototype.getFirefoxPreferences = function()
 {
     try {
-      return this.getFirefoxPrefsService().getBranch("extensions.mkonicek.fasttranslate.");
+        return this.getFirefoxPrefsService().getBranch("extensions.mkonicek.fasttranslate.");
     } catch(msg) {
         alert(msg);
         return '';

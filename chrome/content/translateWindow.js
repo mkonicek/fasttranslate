@@ -12,17 +12,21 @@ $(window).load(function() {
         return;
     }
     
-    // Passed preferences object (we have to pass it from overlay.js
-    // for security reasons)
-    preferences = window.arguments[0];
+    // Arguments object passed from overlay.js
+    var windowParams = window.arguments[0];
+    
+    // (we have to pass preferences from overlay.js for security reasons)
+    preferences = windowParams.preferences;
     applyPreferences();
     
-    var browserSelectedText = window.arguments[1];
+    var browserSelectedText = windowParams.selectedText;
     if (browserSelectedText != '') {
         setInput(browserSelectedText);
         // show translation if some text was selected
         refreshTranslation();
     }
+    
+    setIsOpenedFromTextArea(windowParams.isOpenedFromTextArea);
 });
 
 function applyPreferences() {
@@ -34,6 +38,8 @@ function applyPreferences() {
 $(document).ready(function() {
     initControls();
     $("#noLanguageDiv").hide();
+    $("#infoDiv").hide();
+    btnReplace.hide();
 
     // Default state
     setInput('');
@@ -61,7 +67,6 @@ $(document).ready(function() {
     
     // replace button
     btnReplace.click(function() { alert('a'); })
-    btnReplace.toggle();
     
     registerCloseWindowByEsc();
 });   // document.ready
@@ -80,8 +85,8 @@ function openAddLangDropdown()
 {
     var cmbInput = $('#cAddStarredLang .ui-autocomplete-input');
     if (isAddLangOpened) {
-    	cmbInput.autocomplete("close");
-    	closeAddLang();
+    	cmbInput.autocomplete("search", "");
+        cmbInput.focus();
     	return;
 	}
     cmbInput.val('');

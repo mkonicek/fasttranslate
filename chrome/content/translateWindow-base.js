@@ -13,11 +13,11 @@ var btnOptions = '';
 var btnRelace = '';
 
 function getTargetLang() {
-    return preferences.targetLang;
+    return preferences.getTargetLang();
 }
 
 function setTargetLang(lang) {
-    preferences.targetLang = lang;
+    preferences.setTargetLang(lang);
     setTargetLangRefreshUI();
 }
 
@@ -40,7 +40,7 @@ function setDefaultLang(lang) {
 }
 
 function getStarredLangs() {
-    return preferences.starredLangs;
+    return preferences.getStarredLangs();
 }
 
 function addStarredLang(langCode, langName) {
@@ -91,6 +91,14 @@ function getOutput() {
 
 function setOutput(v) {
     txtOutput.text(v);
+}
+
+function setIsOpenedFromTextArea(isOpenedFromTextArea) {
+    if (isOpenedFromTextArea) {
+        $("#btnReplace").show();
+    } else {
+        $("#btnReplace").hide();
+    }  
 }
 
 function initControls() {
