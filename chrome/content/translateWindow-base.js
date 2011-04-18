@@ -51,8 +51,30 @@ function addStarredLang(langCode, langName) {
     initStarredLangUI(langCode, langName);
 }
 
-function removeStarredLang(langCode) {
+function removeStarredLang(langCode) 
+{
+    if (getTargetLang() == langCode) {
+        // removing current language
+        var currentLangIndex = getStarredLangs().indexOf(langCode);
+        if (currentLangIndex == -1) {
+            // Lang being removed is not in langs. Should never happen.
+            // LOG
+            return;
+        }
+        if (currentLangIndex + 1 < getStarredLangs().length) {
+            // select the next one as current
+            setTargetLang(getStarredLangs()[currentLangIndex + 1]);
+        } else if (currentLangIndex > 0) {
+            // select the previous one if we removed the last one
+            setTargetLang(getStarredLangs()[currentLangIndex - 1]);
+        }
+    }
     preferences.removeStarredLang(langCode);
+    if (getStarredLangs().length == 0) {
+        // no languages left - no target lang
+        setTargetLang("");
+        return;
+    }
 }
 
 function getInput() {
