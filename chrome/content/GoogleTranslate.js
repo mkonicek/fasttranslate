@@ -1,3 +1,5 @@
+// googleTranslate communicates with Google's translation service.
+
 var googleTranslate = function () {
     
     var translateUrl = "https://ajax.googleapis.com/ajax/services/language/translate";
