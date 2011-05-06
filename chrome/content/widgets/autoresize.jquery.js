@@ -47,34 +47,34 @@
                         top: 0,
                         left: -9999
                     }).css(propOb).attr('tabIndex','-1').insertBefore(textarea);
-					
+                    
                 })(),
                 lastScrollTop = null,
                 
                 updateSize = function() {
-					
+                    
                     // Prepare the clone:
                     clone.height(0).val($(this).val()).scrollTop(10000);
-					
-					neededHeight = clone.scrollTop();
-					resizeHeight = neededHeight + settings.extraSpace;
-					// if wanting to resize to a smaller height than normal, do nothing
-					// (prevents adding extra space even when not )
-					if (resizeHeight < origHeight) {
-					   if (lastScrollTop > origHeight) {
-					      // but when resizing from bigger to smaller, do it 
+                    
+                    neededHeight = clone.scrollTop();
+                    resizeHeight = neededHeight + settings.extraSpace;
+                    // if wanting to resize to a smaller height than normal, do nothing
+                    // (prevents adding extra space even when not )
+                    if (resizeHeight < origHeight) {
+                       if (lastScrollTop > origHeight) {
+                          // but when resizing from bigger to smaller, do it 
                        } else {
-					       return;
-					   }    
+                           return;
+                       }    
                     }    
                     // Find the height of text:
                     var scrollTop = Math.max(neededHeight, origHeight) + settings.extraSpace,
                     toChange = $(this).add(clone);
-						
+                        
                     // Don't do anything if scrollTop hasen't changed:
                     if (lastScrollTop === scrollTop) { return; }
                     lastScrollTop = scrollTop;
-					
+                    
                     // Check for limit:
                     if ( scrollTop >= settings.limit ) { 
                         // Show scrollbar
@@ -83,7 +83,7 @@
                     }
                     // Fire off callback:
                     settings.onResize.call(this);
-					
+                    
                     // Either animate or directly apply height:
                     settings.animate && textarea.css('display') === 'block' ?
                         toChange.stop().animate({height:scrollTop}, settings.animateDuration, settings.animateCallback)

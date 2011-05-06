@@ -1,4 +1,4 @@
-// Uninteresting parts of translateWindow.js, to separate boilerplate from logic.
+// Uninteresting parts of translateWindow.js, to separate logic from boilerplate.
 
 // controls
 var cmbLangFilter = '';

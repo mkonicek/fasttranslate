@@ -1,9 +1,6 @@
-// We are using Firefox preferences (instead of local storage) because 
-// Firefox does not support local storage in file:/// protocol (Chrome does).
-// Maybe the FF team will change it in the final FF4, but we still want to
-// support FF3.
+// Dummy Preferences implementation used as Null object 
+// when Preferences is not available.
 
-// Constructor of Preferences object.
 var DefaultPreferences = function()
 {
     this.defaultStarredLangs = [];
@@ -83,4 +80,4 @@ DefaultPreferences.prototype.load = function()
 DefaultPreferences.prototype.save = function() 
 {
    
-}                  
+}

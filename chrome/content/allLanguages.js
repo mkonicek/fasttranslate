@@ -1,3 +1,6 @@
+// List of all available languages.
+// Consider using Google translate service providing localized language names.
+
 var allLanguages = {
     getLangName: function(langCode)
     {

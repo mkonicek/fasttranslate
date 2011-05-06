@@ -1,7 +1,9 @@
+// Persistently (locally) stores selected languages.
+
 // We are using Firefox preferences (instead of local storage) because 
 // Firefox does not support local storage in file:/// protocol (Chrome does).
 // Maybe the FF team will change this in the final FF4, but we still want to
-// support FF3.
+// support FF3. 
 
 // Constructor of Preferences object.
 var Preferences = function()
@@ -25,26 +27,22 @@ Preferences.prototype.isAvailable = function()
     return this.firefoxPrefs != '';
 }  
 
-// Get target language.
 Preferences.prototype.getTargetLang = function() 
 {
     return this.targetLang; 
 }
-    
-// Sets target language.    
+       
 Preferences.prototype.setTargetLang = function(langCode) 
 {
     this.targetLang = langCode;
     this.save(); 
 }
 
-// Get default language.
 Preferences.prototype.getDefaultLang = function() 
 {
     return this.defaultLang; 
 }
-    
-// Sets default language.    
+      
 Preferences.prototype.setDefaultLang = function(langCode) 
 {
     this.defaultLang = langCode;
@@ -85,7 +83,7 @@ Preferences.prototype.load = function()
     }
     if (this.firefoxPrefs.prefHasUserValue("starredLangs")) {
         var loadedLangs = this.firefoxPrefs.getCharPref("starredLangs"); 
-        this.starredLangs = JSON.parse(loadedLangs);    // FF specific JSON
+        this.starredLangs = JSON.parse(loadedLangs);    // porting to Chrome: JSON is FF specific
     }
 }  
 
@@ -97,18 +95,17 @@ Preferences.prototype.save = function()
     }
     this.firefoxPrefs.setCharPref("targetLang", this.getTargetLang());
     this.firefoxPrefs.setCharPref("defaultLang", this.getDefaultLang());
-    this.firefoxPrefs.setCharPref("starredLangs", JSON.stringify(this.getStarredLangs())); // FF specific JSON
+    this.firefoxPrefs.setCharPref("starredLangs", JSON.stringify(this.getStarredLangs())); // porting to Chrome: JSON is FF specific
     this.getFirefoxPrefsService().savePrefFile(null);
 }                  
 
-// Get the Firefox preferences service.
 Preferences.prototype.getFirefoxPrefsService = function()
 {
     return Components.classes["@mozilla.org/preferences-service;1"]
                 .getService(Components.interfaces.nsIPrefService);
 }
 
-// Get the fastranslate Firefox preferences object.
+// Get the Firefox preferences object for fastranslate addon.
 Preferences.prototype.getFirefoxPreferences = function()
 {
     try {

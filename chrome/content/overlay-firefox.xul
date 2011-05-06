@@ -4,6 +4,8 @@
 
 <overlay id="id_fasttranslate_overlay"
 		 xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+		 
+	<!-- Adds "Translate" item to browser's context menu and registers a keyboard shortcut. -->
 	
 	<!-- Scripts -->
 	<!-- Including a script here is necessary if it needs to access globals like window.alert() -->

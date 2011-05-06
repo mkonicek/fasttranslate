@@ -1,4 +1,9 @@
-// Object containing persistent user preferences (call save() to persist).
+
+// The main logic of the FastTranslate addon.
+
+
+
+// Preferences object containing persistent user preferences (call save() to persist).
 // Passed from overlay.js (for FF security reasons).
 var preferences = new DefaultPreferences();
 

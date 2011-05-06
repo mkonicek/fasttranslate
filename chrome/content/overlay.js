@@ -1,4 +1,4 @@
-
+// The command called when the context menu item or shortcut fires.
 var openWindowCommand = {
 
     run : function () { 
@@ -10,7 +10,7 @@ var openWindowCommand = {
         var clickedNode = document.popupNode;
         var windowParams = {
             // passing preferences like this is necessary for security reasons:
-            // if preferences is just included by translateWindow.html, it does not
+            // if preferences.js is just included in translateWindow.html, it does not
             // have permissions to access Firefox preferences
             preferences: new Preferences(),
             selectedText: this.getSelectedText(clickedNode),
@@ -18,6 +18,16 @@ var openWindowCommand = {
         };
         window.openDialog(windowUrl, "Translate", windowFeatures, windowParams);
     },
+    
+    // Returns the string selected in the browser
+    getSelectedText: function(clickedNode) 
+    {
+        if (openWindowCommand.isTextArea(clickedNode)) {
+            return clickedNode.value.substring(clickedNode.selectionStart, clickedNode.selectionEnd);
+        }
+        // Generic way to get selection
+        return document.commandDispatcher.focusedWindow.getSelection().toString();
+    }
     
     // Returns true if DOM node is input or textarea
     isTextArea: function(clickedNode) 
@@ -31,14 +41,4 @@ var openWindowCommand = {
         }
         return false;
     },
-    
-    // Returns the string selected in the browser
-    getSelectedText: function(clickedNode) 
-    {
-        if (openWindowCommand.isTextArea(clickedNode)) {
-            return clickedNode.value.substring(clickedNode.selectionStart, clickedNode.selectionEnd);
-        }
-        // Generic way to get selection
-        return document.commandDispatcher.focusedWindow.getSelection().toString();
-    }
 };
