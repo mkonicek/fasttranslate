@@ -27,7 +27,7 @@ var openWindowCommand = {
         }
         // Generic way to get selection
         return document.commandDispatcher.focusedWindow.getSelection().toString();
-    }
+    },
     
     // Returns true if DOM node is input or textarea
     isTextArea: function(clickedNode) 

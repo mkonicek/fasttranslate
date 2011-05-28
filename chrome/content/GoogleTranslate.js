@@ -6,7 +6,6 @@ var googleTranslate = function () {
     var translateUrl = "https://ajax.googleapis.com/ajax/services/language/translate";
     var detectUrl = "https://ajax.googleapis.com/ajax/services/language/detect";
     var apiKey = "ABQIAAAAyVe43xCSbPm2ujTjdoIuHhTNFBTXcVoi_aH6YNJgFN7Emd4MJBS4E3dOq2L8GfPssVEyePXYxdy1aQ";
-    
     // not using v2 currently
     //var translateUrl = "https://www.googleapis.com/language/translate/v2";
     //var detectUrl = "https://www.googleapis.com/language/translate/v2/detect";
