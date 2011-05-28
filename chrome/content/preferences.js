@@ -17,7 +17,9 @@ var Preferences = function()
     this.targetLang = this.defaultTargetLang;
     this.defaultLang = this.defaultDefaultLang;
     
-    this.load();
+    this.load();   
+    // always use browser lang, defaultLang is not configurable (yet) anyway
+    this.defaultLang = this.defaultDefaultLang;
     return this;
 }
 

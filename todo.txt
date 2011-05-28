@@ -1,0 +1,5 @@
+catch exceptions on proper places
+
+determine textArea when keyboard shortcut used (current element or something, not popupelement)
+
+(show "how to" on first run)
