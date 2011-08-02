@@ -130,12 +130,12 @@ function refreshTranslation() {
         setOutput('Sorry, the text is too long.');
         return;
     }
-    googleTranslate.translateSmart(getDefaultLang(), getTargetLang(), getInput(),
+    googleTranslate.translateSimple(getDefaultLang(), getTargetLang(), getInput(),
         // show translated string
         function(translatedStr, sourceLang, targetLang) { 
             $("#noLanguageDiv").hide();
             // show visually into which lang we are translating, keep targetLang unchanged
-            updateSelectedStarredLang(targetLang);
+            // updateSelectedStarredLang(targetLang);  // only needed for translateSmart
             updateTranslationResult(unescape(translatedStr), sourceLang, targetLang); 
         },
         // show error message

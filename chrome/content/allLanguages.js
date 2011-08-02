@@ -4,16 +4,17 @@
 var allLanguages = {
     getLangName: function(langCode)
     {
-        return allLangs[langCode];
+        var langName = this.langMap[langCode];
+        return (langName === undefined) ? 'auto' : langName;
     },
 
     getLanguages: function() 
     {
-        return allLangs; 
+        return this.langMap; 
     } 
-}
+};
 
-allLangs = {
+allLanguages.langMap = {
     'af' : 'Afrikaans',
     'sq' : 'Albanian',
     'am' : 'Amharic',
@@ -121,4 +122,4 @@ allLangs = {
     'cy' : 'Welsh',
     'yi' : 'Yiddish',
     'yo' : 'Yoruba' 
-}
+};
