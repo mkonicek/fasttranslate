@@ -23,12 +23,16 @@ function setTargetLang(lang) {
 
 function setTargetLangRefreshUI()
 {
-    var targetLang = getTargetLang();
     refreshTranslation();
+    updateSelectedStarredLang(getTargetLang());
+}
+
+function updateSelectedStarredLang(selectedLang)
+{
     // remove selected class from all
     $('#cStarredLanguages .starredLang').removeClass('starredLangSelected');
     // add selected class to 1 selected
-    $('#cStarredLanguages .cStarredLang.' + targetLang + ' .starredLang').addClass('starredLangSelected');
+    $('#cStarredLanguages .cStarredLang.' + selectedLang + ' .starredLang').addClass('starredLangSelected');
 }
    
 function getDefaultLang() {

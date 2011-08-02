@@ -1,0 +1,11 @@
+== Code overview
+
+There are 3 types of languages:
+  * defaultLang - the "native" language of user's browser
+  * starredLangs - user's favorite languages, on the right in the UI
+  * targetLang - the selected 
+
+The logic is the following:
+Autodetect the language of the input (autodetect is reliable enough, we don't want to bother the user with manually specifying source lang).
+If text is in foreing language, translate foreign->native(defaultLang).
+If text is in native language (defaultLang), translate native->targetLang.

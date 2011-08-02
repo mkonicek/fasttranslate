@@ -8,9 +8,9 @@
 // Constructor of Preferences object.
 var Preferences = function()
 {
-    this.defaultStarredLangs = [];
     this.defaultTargetLang = '';
     this.defaultDefaultLang = firefox.getBrowserLang().split("-")[0];
+    this.defaultStarredLangs = [this.defaultDefaultLang];  // by default, the native language is the only starred one
     this.firefoxPrefs = this.getFirefoxPreferences();
     
     this.starredLangs = this.defaultStarredLangs;
@@ -86,6 +86,11 @@ Preferences.prototype.load = function()
     if (this.firefoxPrefs.prefHasUserValue("starredLangs")) {
         var loadedLangs = this.firefoxPrefs.getCharPref("starredLangs"); 
         this.starredLangs = JSON.parse(loadedLangs);    // porting to Chrome: JSON is FF specific
+        if (this.starredLangs.length === 0) {
+            alert('empty langs, adding default ' + this.defaultStarredLangs);
+            // if user deletes all langs, add at least the default one
+            this.starredLangs = this.defaultStarredLangs;
+        }
     }
 }  
 

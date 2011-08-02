@@ -134,6 +134,8 @@ function refreshTranslation() {
         // show translated string
         function(translatedStr, sourceLang, targetLang) { 
             $("#noLanguageDiv").hide();
+            // show visually into which lang we are translating, keep targetLang unchanged
+            updateSelectedStarredLang(targetLang);
             updateTranslationResult(unescape(translatedStr), sourceLang, targetLang); 
         },
         // show error message
