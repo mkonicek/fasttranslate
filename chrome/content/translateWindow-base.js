@@ -121,7 +121,7 @@ function initControls() {
 function registerCloseWindowByEsc() {
     window.onkeyup = function (event) {
         if (event.keyCode == 27) {
-        	window.close ();
+        	window.close();
         }
     }
 }

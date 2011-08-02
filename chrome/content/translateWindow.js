@@ -1,13 +1,11 @@
 
 // The main logic of the FastTranslate addon.
 
-
-
 // Preferences object containing persistent user preferences (call save() to persist).
 // Passed from overlay.js (for FF security reasons).
 var preferences = new DefaultPreferences();
-
 var optionsFirstTime = true;
+var insertTextCallback = null;
 
 $(window).load(function() {
     // Argument passed from caller (overlay.js)
@@ -32,6 +30,7 @@ $(window).load(function() {
     }
     
     setIsOpenedFromTextArea(windowParams.isOpenedFromTextArea);
+    insertTextCallback = windowParams.insertTextCallback;
 });
 
 function applyPreferences() {
@@ -70,8 +69,13 @@ $(document).ready(function() {
     // options
     cOptions.hide();
     
-    // replace button
-    btnReplace.click(function() { alert('a'); })
+    // insert button
+    btnReplace.click(function() {
+        if (insertTextCallback != null) {
+            insertTextCallback(getOutput());
+        }
+        window.close();
+    });
     
     registerCloseWindowByEsc();
 });   // document.ready
