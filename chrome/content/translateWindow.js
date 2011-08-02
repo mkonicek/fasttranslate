@@ -130,10 +130,17 @@ function refreshTranslation() {
         setOutput('Sorry, the text is too long.');
         return;
     }
+    if (getStarredLangs().length !== 0) {
+        $("#noLanguageDiv").hide();
+    } else {
+        // show 'please add language' when no languages added
+        $("#noLanguageDiv").show();
+        updateTranslationResult('', '', '');
+        return;
+    }
     googleTranslate.translateSimple(getDefaultLang(), getTargetLang(), getInput(),
         // show translated string
-        function(translatedStr, sourceLang, targetLang) { 
-            $("#noLanguageDiv").hide();
+        function(translatedStr, sourceLang, targetLang) {
             // show visually into which lang we are translating, keep targetLang unchanged
             // updateSelectedStarredLang(targetLang);  // only needed for translateSmart
             updateTranslationResult(unescape(translatedStr), sourceLang, targetLang); 
@@ -142,7 +149,6 @@ function refreshTranslation() {
         function(errorMessage) { 
             if (errorMessage == googleTranslate.noTargetLangErrorMsg) { 
                 setOutput("");
-                $("#noLanguageDiv").show();
             } else {
                 setOutput(errorMessage);
             } 
