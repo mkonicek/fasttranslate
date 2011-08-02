@@ -148,7 +148,7 @@ function refreshTranslation() {
         // show error message
         function(errorMessage) { 
             if (errorMessage == googleTranslate.noTargetLangErrorMsg) { 
-                setOutput("");
+                setOutput('');
             } else {
                 setOutput(errorMessage);
             } 
@@ -159,14 +159,17 @@ function refreshTranslation() {
 function updateTranslationResult(translatedStr, sourceLang, targetLang)
 {
     setOutput(translatedStr);
+    // Show source lang in the corner tooltip
+    $('#langTooltipCorner').attr('title', allLanguages.getLangName(sourceLang));
+    $('#langTooltipCorner').attr('alt', allLanguages.getLangName(sourceLang));
 }
 
 function initDefaultLanguagesCombo(languagesSelect) {
     //comboBox.empty();  // leave the one dummy item, so that combo stays empty
     $.each(allLanguages.getLanguages(), function(langCode, langName) {   
          languagesSelect.
-              append($("<option />").
-              attr("value", langCode).
+              append($('<option />').
+              attr('value', langCode).
               text(langName)); 
     });
 }

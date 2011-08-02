@@ -7,6 +7,10 @@ a {
     color: #1993FF;
 }
 
+#windowDiv {
+    width: 600px;
+}
+
 #infoDiv {
     font-size: 80%;
     margin: 12px 0; 
@@ -90,6 +94,25 @@ div.cStarredLang:hover .starredLangDel {
     border: 1px solid #dddddd;
     -moz-border-radius: 3px;
     padding: 5px;
+}
+
+#langTooltipCorner {
+    /* top right corner of inputDiv */
+    position:absolute;
+    top: 0;
+    right: 0;
+    width: 0.6em;
+    height: 0.6em;
+    padding: 0;
+    margin: 0;
+    color: #9cd;
+    cursor: default; 
+}
+
+#inputDiv {
+    /* relative allows langTooltipDiv to be positioned 
+       absolutely in inputDiv */
+    position:relative
 }
 
 #creditsDiv {

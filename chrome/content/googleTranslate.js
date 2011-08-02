@@ -57,7 +57,7 @@ var googleTranslate = function () {
               }
               if (confidence < 0.003) {
                   // Special case: the input language can't really be detected (one word).
-                  // Instead of using some random detected language, assume user 
+                  // Instead of using some random detected language, assume that user 
                   // typed the word in their default lang.
                   from = defaultLang;
                   to = foreignLang;
@@ -68,9 +68,9 @@ var googleTranslate = function () {
                   return;
               }
               translate(from, to, inputStr, 
-                function(translatedStr) { 
+                function(responseData) { 
                     // show translated string
-                    onSuccess(translatedStr, from, to); 
+                    onSuccess(responseData.translatedText, from, to); 
                 }, 
                 function(errorMessage) { onError(errorMessage); } );
           }, 
@@ -79,14 +79,23 @@ var googleTranslate = function () {
     }
     
     // always translate auto->selected
+    // onSuccess: function(string translatedStr, string sourceLang, string targetLang) 
+    // onError: function(string message)
     function translateSimple(defaultLang, targetLang, inputStr, onSuccess, onError)
     {
-        translate('', targetLang, inputStr, onSuccess, onError);
+        // defaultLang is not used, but kept for API compatibility with translateSmart
+        // '' is for 'auto'
+        translate('', targetLang, inputStr,
+            function(responseData) { 
+                onSuccess(responseData.translatedText, responseData.detectedSourceLanguage, targetLang); 
+            }, 
+            function(errorMessage) { onError(errorMessage); } 
+        );
     }
         
     // Wraps the Google translate 'translate' call
     // langFrom, langTo: language code string (e.g. 'en')  
-    // onSuccess: function(string translatedStr) 
+    // onSuccess: function(string responseData) (contains translatedText, detectedSourceLanguage) 
     // onError: function(string message)
     function translate(langFrom, langTo, inputStr, onSuccess, onError) 
     {
@@ -103,9 +112,8 @@ var googleTranslate = function () {
                                 allLanguages.getLangName(langFrom), 
                                 allLanguages.getLangName(langTo), 
                                 result.responseDetails));
-                        //onError(result.responseDetails);
                     } else {
-                        onSuccess(result.responseData.translatedText);
+                        onSuccess(result.responseData);
                     }
                 },  
                 error: function(XMLHttpRequest, textStatus, errorThrown) {
