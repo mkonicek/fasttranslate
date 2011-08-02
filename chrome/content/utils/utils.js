@@ -7,11 +7,33 @@ Array.prototype.remove = function(value) {
     if (idx != -1) this.splice(idx, 1);
 }
 
-unescape = function(value) {
+var utils = {};
+
+utils.unescape = function(value) {
     var htmlNode = document.createElement('div');
     htmlNode.innerHTML = value;
     if (htmlNode.innerText) {
         return htmlNode.innerText; // IE
     }
     return htmlNode.textContent; // FF
+}
+
+// Inserts a string into original string at a given position.
+// Position must be 0..original.length
+utils.insertStringAtPos = function(original, insert, pos) {
+    if (utils.isBlank(original)) {
+        return insert;
+    }
+    if (utils.isBlank(insert)) {
+        return original;
+    }
+    return original.substring(0, pos) + insert + original.substring(pos, original.length);
+}
+
+utils.isUndefinedOrNull = function(obj) {
+    return (typeof obj === 'undefined') || obj === null;
+}
+
+utils.isBlank = function(obj) {
+    return utils.isUndefinedOrNull(obj) || obj === '';
 }

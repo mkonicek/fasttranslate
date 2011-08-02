@@ -24,13 +24,19 @@ var openWindowCommand = {
         window.openDialog(windowUrl, "Translate", windowFeatures, windowParams);
     },
     
-    insertText: function(text) {
+    insertText: function(insertedText) {
         // get the focused node again (storing it caused errors)
         // This can be a different node than the original because user can change focus
         // while the translate window is open, but doing so is uncommon and does not cause any crashes.
         var focusedDomNode = document.commandDispatcher.focusedElement;
-        if ((typeof focusedDomNode !== 'undefined') && focusedDomNode != null) {
-            focusedDomNode.value = focusedDomNode.value + text;
+        if (!utils.isUndefinedOrNull(focusedDomNode)) {
+            var selStart = focusedDomNode.selectionStart;
+            // insert text at caret position
+            focusedDomNode.value = utils.insertStringAtPos(focusedDomNode.value, insertedText, focusedDomNode.selectionStart);
+            // place the caret after the inserted text
+            focusedDomNode.selectionStart = selStart + insertedText.length; 
+            focusedDomNode.selectionEnd = focusedDomNode.selectionStart;
+            // focusedDomNode.value = focusedDomNode.value + text;
         }
     },
     
@@ -53,5 +59,5 @@ var openWindowCommand = {
             return true;    
         }
         return false;
-    },
+    }
 };

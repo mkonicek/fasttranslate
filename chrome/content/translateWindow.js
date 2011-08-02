@@ -147,7 +147,7 @@ function refreshTranslation() {
         function(translatedStr, sourceLang, targetLang) {
             // show visually into which lang we are translating, keep targetLang unchanged
             // updateSelectedStarredLang(targetLang);  // only needed for translateSmart
-            updateTranslationResult(unescape(translatedStr), sourceLang, targetLang); 
+            updateTranslationResult(utils.unescape(translatedStr), sourceLang, targetLang); 
         },
         // show error message
         function(errorMessage) { 
