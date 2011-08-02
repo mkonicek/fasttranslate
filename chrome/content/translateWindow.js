@@ -161,7 +161,7 @@ function updateTranslationResult(translatedStr, sourceLang, targetLang)
     setOutput(translatedStr);
     // Show source lang in the corner tooltip
     $('#langTooltipCorner').attr('title', allLanguages.getLangName(sourceLang));
-    $('#langTooltipCorner').attr('alt', allLanguages.getLangName(sourceLang));
+    // see here how to emulate (not working) tooltips http://flowplayer.org/tools/tooltip/index.html
 }
 
 function initDefaultLanguagesCombo(languagesSelect) {
