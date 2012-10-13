@@ -1,12 +1,18 @@
-I have a lot of international friends on facebook
-and I usually chat in up to 5 languages.
-I built this add-on for myself because all existing solutions
-were frustrating. Now I'm happy - FastTranslate is awesome! :)
+I have a lot of international friends on facebook and chat in up to five 
+languages and needed a quick way to look up words while typing while switching
+languages frequently. 
+I built this add-on for myself on top of Google translate API and I'm happy 
+with the result - FastTranslate is awesome! :)
 
 https://addons.mozilla.org/firefox/addon/fast-translate/
 
-Uses Google translate API, but since this API will shutdown by the end of the year,
-will switch to Bing API.
-Chrome version to come!
+(this is my first Firefox add-on and my first javascript project)
 
-(this is my first Firefox add-on and first javascript project)
+=============
+Update:
+
+The Google translate user interface improved a lot since I wrote this add-on.
+I also switched from Firefox to Chrome since. As a result, sadly, this
+add-on is no longer maintained.
+
+
