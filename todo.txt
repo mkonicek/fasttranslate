@@ -1,5 +1,3 @@
-catch exceptions on proper places
-
-determine textArea when keyboard shortcut used (current element or something, not popupelement)
+Find the current textarea when using a keyboard shortcut instead of context menu to show translations.
 
 (show "how to" on first run)
